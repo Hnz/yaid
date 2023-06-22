@@ -5,6 +5,7 @@ package yaid_test
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/hnz/yaid"
@@ -12,33 +13,47 @@ import (
 
 func Example() {
 	y := yaid.YAID{}
-	y.SetEpoch(16874465570)
+	t := time.Date(2222, 1, 2, 3, 4, 5, 6, time.UTC)
+	y.SetTime(t)
 	y.SetShard([]byte("X"))
 
 	fmt.Println("yaid: ", y)
-	fmt.Println("time: ", y.Time())
 	fmt.Println("epoch:", y.Epoch())
+	fmt.Println("time: ", y.Time().UTC())
 	//	fmt.Println("shard:", )
 
 	// Output:
-	// yaid:  0S4MCGEG002R
-	// time:  1970-01-20 13:44:06.557 +0100 CET
-	// epoch: 1687446557
+	// yaid:  BJA1W6ST0002R
+	// epoch: 795243984500
+	// time:  2222-01-02 03:04:05 +0000 UTC
 }
 
 func ExampleParse() {
-	y, err := yaid.Parse("0S4MCGEG002R")
+	y, err := yaid.Parse("BJA1W6ST0002R")
 	if err != nil {
 		fmt.Println("Error!", err)
 	}
 
 	fmt.Println("yaid: ", y)
-	fmt.Println("time: ", y.Time())
 	fmt.Println("epoch:", y.Epoch())
+	fmt.Println("time: ", y.Time().UTC())
 	// Output:
-	// yaid:  0S4MCGEG002R
-	// time:  1970-01-20 13:44:06.557 +0100 CET
-	// epoch: 1687446557
+	// yaid:  BJA1W6ST0002R
+	// epoch: 795243984500
+	// time:  2222-01-02 03:04:05 +0000 UTC
+}
+
+func ExampleYAID_SetTime() {
+	y := yaid.YAID{}
+	fmt.Println(y.Time().UTC())
+
+	t := time.Date(2222, 1, 2, 3, 4, 5, 6, time.UTC)
+	y.SetTime(t)
+	fmt.Println(y.Time().UTC())
+
+	// Output:
+	// 1970-01-01 00:00:00 +0000 UTC
+	// 2222-01-02 03:04:05 +0000 UTC
 }
 
 func BenchmarkYAID(b *testing.B) {

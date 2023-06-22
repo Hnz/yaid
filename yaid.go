@@ -26,7 +26,7 @@ A ULID is a 16 byte Universally Unique Lexicographically Sortable Identifier
 
 bla.
 
-5 byte timestamp in miliseconds starting from January 1, 1970 12:00:00 AM UTC
+5 byte timestamp as hundredths of a second passed since January 1, 1970 12:00:00 AM UTC
 2 byte random
 1 byte shard key
 
@@ -50,6 +50,9 @@ const (
 	TIME_BYTES   = 5
 	RANDOM_BYTES = 2
 	SHARD_BYTES  = 1
+
+	// 1 for miliseconds, 10 for centiseconds, 1000 for seconds, etc.
+	DEFIDER = 10
 )
 
 var (
@@ -67,18 +70,15 @@ func (y *YAID) Base58() string {
 	return base58.Encode(y[:])
 }
 
-// Time returns the Unix time in milliseconds encoded in the ULID.
-// Use the top level Time function to convert the returned value to
-// a time.Time.
+// Returns the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC
 func (y YAID) Epoch() uint64 {
 	return uint64(y[4]) | uint64(y[3])<<8 |
 		uint64(y[2])<<16 | uint64(y[1])<<24 |
 		uint64(y[0])<<32
 }
 
-// Set the first 6 bytes (big-ending) of the timestamp as time
+// Set the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC
 func (y *YAID) SetEpoch(epoch uint64) error {
-	fmt.Println("EPOC", epoch)
 	if epoch > MaxEpoch {
 		return ErrorEpochSize
 	}
@@ -114,7 +114,7 @@ func (y *YAID) SetShard(shard []byte) error {
 }
 
 func (y *YAID) SetTime(t time.Time) error {
-	ms := t.UnixMilli()
+	ms := t.UnixMilli() / DEFIDER
 	return y.SetEpoch(uint64(ms))
 }
 
@@ -123,10 +123,8 @@ func (y YAID) String() string {
 }
 
 func (y YAID) Time() time.Time {
-	ms := y.Epoch()
-	s := int64(ms / 1e3)
-	ns := int64((ms % 1e3) * 1e6)
-	return time.Unix(s, ns)
+	ms := y.Epoch() * DEFIDER
+	return time.UnixMilli(int64(ms))
 }
 
 type Generator struct {
