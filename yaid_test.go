@@ -18,14 +18,13 @@ func Example() {
 	y.SetShard([]byte("X"))
 
 	fmt.Println("yaid: ", y)
-	fmt.Println("epoch:", y.Epoch())
 	fmt.Println("time: ", y.Time().UTC())
-	//	fmt.Println("shard:", )
+	fmt.Println("shard:", y.Shard())
 
 	// Output:
 	// yaid:  BJA1W6ST0002R
-	// epoch: 795243984500
 	// time:  2222-01-02 03:04:05 +0000 UTC
+	// shard: [88]
 }
 
 func ExampleParse() {
@@ -35,12 +34,12 @@ func ExampleParse() {
 	}
 
 	fmt.Println("yaid: ", y)
-	fmt.Println("epoch:", y.Epoch())
 	fmt.Println("time: ", y.Time().UTC())
+	fmt.Println("shard:", y.Shard())
 	// Output:
 	// yaid:  BJA1W6ST0002R
-	// epoch: 795243984500
 	// time:  2222-01-02 03:04:05 +0000 UTC
+	// shard: [88]
 }
 
 func ExampleYAID_SetTime() {
