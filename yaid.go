@@ -39,6 +39,7 @@ package yaid
 import (
 	"crypto/rand"
 	"fmt"
+	"io"
 	"time"
 
 	"github.com/btcsuite/btcutil/base58"
@@ -46,7 +47,7 @@ import (
 )
 
 const (
-	TIME_BYTES   = 5
+	TIME_BYTES   = 6
 	RANDOM_BYTES = 2
 	SHARD_BYTES  = 1
 )
@@ -54,12 +55,12 @@ const (
 var (
 	MaxEpoch = YAID{0xFF, 0xFF, 0xFF, 0xFF, 0xFF}.Epoch()
 
-	ErrorEpochSize = fmt.Errorf("epoch must not be greater than %d", MaxEpoch)
-	ErrorShardSize = fmt.Errorf("shard key must not be longer than %d bytes", SHARD_BYTES)
-	ErrorYaidSize  = fmt.Errorf("yaid must be exactly %d bytes", TIME_BYTES+RANDOM_BYTES+SHARD_BYTES)
+	ErrorEpochSize  = fmt.Errorf("epoch must not be greater than %d", MaxEpoch)
+	ErrorRandomSize = fmt.Errorf("random part be exactly %d bytes", RANDOM_BYTES)
+	ErrorShardSize  = fmt.Errorf("shard key must not be longer than %d bytes", SHARD_BYTES)
+	ErrorYaidSize   = fmt.Errorf("yaid must be exactly %d bytes", TIME_BYTES+RANDOM_BYTES+SHARD_BYTES)
 )
 
-// Client is an implementation of http.Client that allows for the response body to be seeked
 type YAID [TIME_BYTES + RANDOM_BYTES + SHARD_BYTES]byte
 
 func (y *YAID) Base58() string {
@@ -70,11 +71,9 @@ func (y *YAID) Base58() string {
 // Use the top level Time function to convert the returned value to
 // a time.Time.
 func (y YAID) Epoch() uint64 {
-	return uint64(y[4]) |
-		uint64(y[3])<<8 |
-		uint64(y[2])<<16 |
-		uint64(y[1])<<24 |
-		uint64(y[0])<<32
+	return uint64(y[5]) | uint64(y[4])<<8 |
+		uint64(y[3])<<16 | uint64(y[2])<<24 |
+		uint64(y[1])<<32 | uint64(y[0])<<40
 }
 
 // Set the first 6 bytes (big-ending) of the timestamp as time
@@ -83,34 +82,23 @@ func (y *YAID) SetEpoch(epoch uint64) error {
 		return ErrorEpochSize
 	}
 
-	(*y)[0] = byte(epoch >> 32)
-	(*y)[1] = byte(epoch >> 24)
-	(*y)[2] = byte(epoch >> 16)
-	(*y)[3] = byte(epoch >> 8)
-	(*y)[4] = byte(epoch)
+	(*y)[0] = byte(epoch >> 40)
+	(*y)[1] = byte(epoch >> 32)
+	(*y)[2] = byte(epoch >> 24)
+	(*y)[3] = byte(epoch >> 16)
+	(*y)[4] = byte(epoch >> 8)
+	(*y)[5] = byte(epoch)
 
 	return nil
 }
 
 // Override the random section
-func (y *YAID) SetRandom() error {
-
-	b := make([]byte, RANDOM_BYTES)
-	_, err := rand.Read(b)
-	if err != nil {
-		return err
-	}
-
+func (y *YAID) SetRandom(b []byte) error {
 	for i := 0; i < RANDOM_BYTES; i++ {
 		(*y)[i+TIME_BYTES] = b[i]
 	}
 
 	return nil
-}
-
-func (y YAID) SetTime(t time.Time) {
-	ms := uint64(t.UnixMilli())
-	y.SetEpoch(ms)
 }
 
 func (y *YAID) SetShard(shard []byte) error {
@@ -125,6 +113,11 @@ func (y *YAID) SetShard(shard []byte) error {
 	return nil
 }
 
+func (y *YAID) SetTime(t time.Time) error {
+	ms := time.Now().UnixMilli()
+	return y.SetEpoch(uint64(ms))
+}
+
 func (y YAID) String() string {
 	return crock32.Encode(y[:])
 }
@@ -136,17 +129,34 @@ func (y YAID) Time() time.Time {
 	return time.Unix(s, ns)
 }
 
-func New(shard []byte) (y YAID, err error) {
+type Generator struct {
+	Shard  []byte
+	Random io.Reader
+}
 
-	y.SetRandom()
+func (g Generator) New() (y YAID, err error) {
+	err = y.SetTime(time.Now())
+	if err != nil {
+		return y, err
+	}
 
-	//fmt.Println(y, b)
+	err = y.SetShard(g.Shard)
+	if err != nil {
+		return y, err
+	}
 
-	y.SetTime(time.Now())
+	b := make([]byte, RANDOM_BYTES)
+	_, err = g.Random.Read(b)
+	if err != nil {
+		return y, err
+	}
+	y.SetRandom(b)
 
-	//fmt.Println(y)
-	y.SetShard(shard)
 	return y, err
+}
+
+func New(shard []byte) (y YAID, err error) {
+	return Generator{shard, rand.Reader}.New()
 }
 
 func Parse(yaid string) (y YAID, err error) {

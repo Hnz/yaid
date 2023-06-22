@@ -21,13 +21,13 @@ func Example() {
 	//	fmt.Println("shard:", )
 
 	// Output:
-	// yaid:  0S4MCGEG002R
+	// yaid:  00S4MCGEG002R
 	// time:  1970-01-20 13:44:06.557 +0100 CET
 	// epoch: 1687446557
 }
 
 func ExampleParse() {
-	y, err := yaid.Parse("0S4MCGEG002R")
+	y, err := yaid.Parse("00S4MCGEG002R")
 	if err != nil {
 		fmt.Println("Error!", err)
 	}
@@ -36,7 +36,7 @@ func ExampleParse() {
 	fmt.Println("time: ", y.Time())
 	fmt.Println("epoch:", y.Epoch())
 	// Output:
-	// yaid:  0S4MCGEG002R
+	// yaid:  00S4MCGEG002R
 	// time:  1970-01-20 13:44:06.557 +0100 CET
 	// epoch: 1687446557
 }
