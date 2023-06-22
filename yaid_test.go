@@ -12,7 +12,7 @@ import (
 
 func Example() {
 	y := yaid.YAID{}
-	y.SetEpoch(1687446557)
+	y.SetEpoch(16874465570)
 	y.SetShard([]byte("X"))
 
 	fmt.Println("yaid: ", y)

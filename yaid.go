@@ -53,10 +53,10 @@ const (
 )
 
 var (
-	MaxEpoch = YAID{0xFF, 0xFF, 0xFF, 0xFF, 0xFF}.Epoch()
+	MaxEpoch = YAID{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}.Epoch()
 
 	ErrorEpochSize  = fmt.Errorf("epoch must not be greater than %d", MaxEpoch)
-	ErrorRandomSize = fmt.Errorf("random part be exactly %d bytes", RANDOM_BYTES)
+	ErrorRandomSize = fmt.Errorf("random part must be exactly %d bytes", RANDOM_BYTES)
 	ErrorShardSize  = fmt.Errorf("shard key must not be longer than %d bytes", SHARD_BYTES)
 	ErrorYaidSize   = fmt.Errorf("yaid must be exactly %d bytes", TIME_BYTES+RANDOM_BYTES+SHARD_BYTES)
 )
@@ -78,6 +78,7 @@ func (y YAID) Epoch() uint64 {
 
 // Set the first 6 bytes (big-ending) of the timestamp as time
 func (y *YAID) SetEpoch(epoch uint64) error {
+	fmt.Println("EPOC", epoch)
 	if epoch > MaxEpoch {
 		return ErrorEpochSize
 	}
@@ -113,7 +114,7 @@ func (y *YAID) SetShard(shard []byte) error {
 }
 
 func (y *YAID) SetTime(t time.Time) error {
-	ms := time.Now().UnixMilli()
+	ms := t.UnixMilli()
 	return y.SetEpoch(uint64(ms))
 }
 
