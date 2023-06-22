@@ -47,7 +47,7 @@ import (
 )
 
 const (
-	TIME_BYTES   = 6
+	TIME_BYTES   = 5
 	RANDOM_BYTES = 2
 	SHARD_BYTES  = 1
 )
@@ -71,9 +71,9 @@ func (y *YAID) Base58() string {
 // Use the top level Time function to convert the returned value to
 // a time.Time.
 func (y YAID) Epoch() uint64 {
-	return uint64(y[5]) | uint64(y[4])<<8 |
-		uint64(y[3])<<16 | uint64(y[2])<<24 |
-		uint64(y[1])<<32 | uint64(y[0])<<40
+	return uint64(y[4]) | uint64(y[3])<<8 |
+		uint64(y[2])<<16 | uint64(y[1])<<24 |
+		uint64(y[0])<<32
 }
 
 // Set the first 6 bytes (big-ending) of the timestamp as time
@@ -82,12 +82,11 @@ func (y *YAID) SetEpoch(epoch uint64) error {
 		return ErrorEpochSize
 	}
 
-	(*y)[0] = byte(epoch >> 40)
-	(*y)[1] = byte(epoch >> 32)
-	(*y)[2] = byte(epoch >> 24)
-	(*y)[3] = byte(epoch >> 16)
-	(*y)[4] = byte(epoch >> 8)
-	(*y)[5] = byte(epoch)
+	(*y)[0] = byte(epoch >> 32)
+	(*y)[1] = byte(epoch >> 24)
+	(*y)[2] = byte(epoch >> 16)
+	(*y)[3] = byte(epoch >> 8)
+	(*y)[4] = byte(epoch)
 
 	return nil
 }
