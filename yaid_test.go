@@ -23,25 +23,34 @@ func Example() {
 	fmt.Println("time: ", y.Time().UTC())
 	fmt.Println("shard:", y.Shard())
 
-	// Output:
-	// yaid:  BJA1W6ST0002R
-	// time:  2222-01-02 03:04:05 +0000 UTC
-	// shard: [88]
-}
-
-func ExampleParse() {
-	y, err := yaid.Parse("BJA1W6ST0002R")
+	y, err := yaid.Parse(y.String())
 	if err != nil {
 		fmt.Println("Error!", err)
 	}
 
-	fmt.Println("yaid: ", y)
 	fmt.Println("time: ", y.Time().UTC())
 	fmt.Println("shard:", y.Shard())
+	fmt.Println("error: ", err)
 	// Output:
+	//
 	// yaid:  BJA1W6ST0002R
 	// time:  2222-01-02 03:04:05 +0000 UTC
 	// shard: [88]
+	// time:  2222-01-02 03:04:05 +0000 UTC
+	// shard: [88]
+	// error:  <nil>
+}
+
+func ExampleYAID_SetShard() {
+	y := yaid.YAID{}
+	fmt.Println(y.Shard())
+
+	y.SetShard([]byte{123})
+	fmt.Println(y.Shard())
+
+	// Output:
+	// [0]
+	// [123]
 }
 
 func ExampleYAID_SetTime() {
@@ -64,9 +73,9 @@ func BenchmarkYAID(b *testing.B) {
 }
 
 func BenchmarkGenerator(b *testing.B) {
-	g := yaid.NewGenerator([]byte("X"))
+	id := yaid.NewGenerator([]byte("X"))
 	for i := 0; i < b.N; i++ {
-		g.New()
+		id()
 	}
 }
 

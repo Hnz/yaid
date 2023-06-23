@@ -121,12 +121,15 @@ func (g Generator) New() (y YAID, err error) {
 	return y, err
 }
 
-func NewGenerator(shard []byte) Generator {
-	return Generator{shard, rand.Reader}
+func NewGenerator(shard []byte) func() (y YAID, err error) {
+	g := Generator{shard, rand.Reader}
+	return func() (y YAID, err error) {
+		return g.New()
+	}
 }
 
 func New(shard []byte) (y YAID, err error) {
-	return NewGenerator(shard).New()
+	return NewGenerator(shard)()
 }
 
 func Parse(yaid string) (y YAID, err error) {
