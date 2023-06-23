@@ -20,10 +20,10 @@ Version 0.1
 ## Layout
 
 | Bits    | Bytes | Content        |
-| ------- | :---: | -------------- |
-| 0 - 39  |   5   | Timestamp      |
-| 40 - 55 |   2   | Differentiator |
-| 56 - 63 |   1   | Descriptor     |
+| ------- | ----- | -------------- |
+| 0 - 39  | 5     | Timestamp      |
+| 40 - 55 | 2     | Differentiator |
+| 56 - 63 | 1     | Meta           |
 
 ## Timestamp
 
@@ -38,7 +38,7 @@ The timestamp will roll over on `June 4, 2318 6:57:57.760 AM UTC`.
 16 bits that are used to make the id unique within a given timestamp.
 A random value or a counter could for example be used.
 
-## Descriptor
+## Meta
 
 8 bit value that information about the id. A database shard id for example.
 

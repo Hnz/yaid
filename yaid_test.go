@@ -11,17 +11,18 @@ import (
 	"github.com/google/uuid"
 	"github.com/hnz/yaid"
 	"github.com/oklog/ulid/v2"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func Example() {
 	y := yaid.YAID{}
 	t := time.Date(2222, 1, 2, 3, 4, 5, 6, time.UTC)
 	y.SetTime(t)
-	y.SetShard([]byte("X"))
+	y.SetMeta([]byte("X"))
 
 	fmt.Println("yaid: ", y)
 	fmt.Println("time: ", y.Time().UTC())
-	fmt.Println("shard:", y.Shard())
+	fmt.Println("shard:", y.Meta())
 
 	y, err := yaid.Parse(y.String())
 	if err != nil {
@@ -29,8 +30,9 @@ func Example() {
 	}
 
 	fmt.Println("time: ", y.Time().UTC())
-	fmt.Println("shard:", y.Shard())
-	fmt.Println("error: ", err)
+	fmt.Println("shard:", y.Meta())
+	fmt.Println("error:", err)
+
 	// Output:
 	//
 	// yaid:  BJA1W6ST0002R
@@ -38,15 +40,15 @@ func Example() {
 	// shard: [88]
 	// time:  2222-01-02 03:04:05 +0000 UTC
 	// shard: [88]
-	// error:  <nil>
+	// error: <nil>
 }
 
-func ExampleYAID_SetShard() {
+func ExampleYAID_SetMeta() {
 	y := yaid.YAID{}
-	fmt.Println(y.Shard())
+	fmt.Println(y.Meta())
 
-	y.SetShard([]byte{123})
-	fmt.Println(y.Shard())
+	y.SetMeta([]byte{123})
+	fmt.Println(y.Meta())
 
 	// Output:
 	// [0]
@@ -72,10 +74,16 @@ func BenchmarkYAID(b *testing.B) {
 	}
 }
 
-func BenchmarkGenerator(b *testing.B) {
+func BenchmarkYAIDGenerator(b *testing.B) {
 	id := yaid.NewGenerator([]byte("X"))
 	for i := 0; i < b.N; i++ {
 		id()
+	}
+}
+
+func BenchmarkObjectID(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		primitive.NewObjectID()
 	}
 }
 
