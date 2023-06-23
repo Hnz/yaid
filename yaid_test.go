@@ -3,12 +3,14 @@
 package yaid_test
 
 import (
+	"crypto/rand"
 	"fmt"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/hnz/yaid"
+	"github.com/oklog/ulid/v2"
 )
 
 func Example() {
@@ -61,6 +63,13 @@ func BenchmarkYAID(b *testing.B) {
 	}
 }
 
+func BenchmarkGenerator(b *testing.B) {
+	g := yaid.NewGenerator([]byte("X"))
+	for i := 0; i < b.N; i++ {
+		g.New()
+	}
+}
+
 func BenchmarkUUIDv1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		uuid.NewUUID()
@@ -70,5 +79,12 @@ func BenchmarkUUIDv1(b *testing.B) {
 func BenchmarkUUIDv4(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		uuid.New()
+	}
+}
+
+func BenchmarkULID(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		ms := time.Now().UnixMilli()
+		ulid.New(uint64(ms), rand.Reader)
 	}
 }
