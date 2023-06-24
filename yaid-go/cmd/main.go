@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hnz/yaid/go-yaid"
+	"github.com/hnz/yaid/yaid-go"
 )
 
 func main() {

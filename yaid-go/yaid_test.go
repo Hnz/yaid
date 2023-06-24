@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/hnz/yaid/go-yaid"
+	"github.com/hnz/yaid/yaid-go"
 	"github.com/oklog/ulid/v2"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
