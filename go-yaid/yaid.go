@@ -30,6 +30,7 @@ package yaid
 
 import (
 	"crypto/rand"
+	"encoding/binary"
 	"fmt"
 	"io"
 	"time"
@@ -50,6 +51,10 @@ const (
 )
 
 type YAID [TIME_BYTES + DIFF_BYTES + META_BYTES]byte
+
+func (y YAID) Int() uint64 {
+	return binary.BigEndian.Uint64(y[:])
+}
 
 // Return id as Base32 crockford encoded string
 func (y YAID) String() string {

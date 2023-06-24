@@ -7,7 +7,6 @@ package main
 
 import (
 	"crypto/rand"
-	"encoding/binary"
 	"flag"
 	"fmt"
 	"os"
@@ -16,7 +15,7 @@ import (
 )
 
 func main() {
-	meta := *flag.Int("m", -1, "Metadata. Number beteen 0-255. Use random value if undefined.")
+	meta := flag.Int("m", -1, "Metadata. Number beteen 0-255. Use random value if negative.")
 	info := flag.String("i", "", "Show id info")
 
 	flag.Parse()
@@ -30,25 +29,29 @@ func main() {
 		// Generate id
 		r := make([]byte, 1)
 
-		if meta == -1 {
+		if *meta < 0 {
 			rand.Read(r)
+		} else if *meta < 256 {
+			r = []byte{uint8(*meta)}
 		} else {
-			binary.LittleEndian.PutUint16(r, uint16(meta))
+			fmt.Fprintln(os.Stderr, "Maximum meta value exceeded")
+			os.Exit(1)
 		}
 
 		y, err := yaid.New(r)
-		if err != nil {
-			panic(err)
-		}
+		handleError(err)
 		fmt.Println(y)
 	} else {
 		// Show info
 		y, err := yaid.Parse(*info)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println("Time:", y.Time())
-		fmt.Println("Meta:", y.Meta())
+		handleError(err)
+		fmt.Println("Time:", y.Time().Format("2006-01-02 15:04:05.00 -07:00:00"))
+		fmt.Println("Meta:", uint8(y.Meta()[0]))
 	}
+}
 
+func handleError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }

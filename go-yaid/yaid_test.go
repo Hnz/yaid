@@ -18,9 +18,10 @@ func Example() {
 	y := yaid.YAID{}
 	t := time.Date(2222, 1, 2, 3, 4, 5, 6, time.UTC)
 	y.SetTime(t)
-	y.SetMeta([]byte("X"))
+	y.SetMeta([]byte{123})
 
 	fmt.Println("yaid: ", y)
+	fmt.Println("int:  ", y.Int())
 	fmt.Println("time: ", y.Time().UTC())
 	fmt.Println("shard:", y.Meta())
 
@@ -35,11 +36,12 @@ func Example() {
 
 	// Output:
 	//
-	// yaid:  BJA1W6ST0002R
+	// yaid:  BJA1W6ST0003V
+	// int:   13341980100657152123
 	// time:  2222-01-02 03:04:05 +0000 UTC
-	// shard: [88]
+	// shard: [123]
 	// time:  2222-01-02 03:04:05 +0000 UTC
-	// shard: [88]
+	// shard: [123]
 	// error: <nil>
 }
 
