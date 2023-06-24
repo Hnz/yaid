@@ -43,6 +43,19 @@ func Example() {
 	// error: <nil>
 }
 
+func ExampleFactory() {
+	f := yaid.Factory([]byte{123})
+	id, err := f()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(id.Meta())
+
+	// Output:
+	//
+	// [123]
+}
+
 func ExampleYAID_SetMeta() {
 	y := yaid.YAID{}
 	fmt.Println(y.Meta())
@@ -75,7 +88,7 @@ func BenchmarkYAID(b *testing.B) {
 }
 
 func BenchmarkYAIDGenerator(b *testing.B) {
-	id := yaid.NewGenerator([]byte("X"))
+	id := yaid.Factory([]byte("X"))
 	for i := 0; i < b.N; i++ {
 		id()
 	}

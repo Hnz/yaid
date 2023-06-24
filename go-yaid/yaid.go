@@ -159,7 +159,8 @@ func (g Generator) New() (y YAID, err error) {
 	return y, err
 }
 
-func NewGenerator(meta []byte) func() (y YAID, err error) {
+// Create a factory that returns ids.
+func Factory(meta []byte) func() (y YAID, err error) {
 	g := Generator{meta, rand.Reader}
 	return func() (y YAID, err error) {
 		return g.New()
@@ -167,7 +168,7 @@ func NewGenerator(meta []byte) func() (y YAID, err error) {
 }
 
 func New(meta []byte) (y YAID, err error) {
-	return NewGenerator(meta)()
+	return Factory(meta)()
 }
 
 func Parse(yaid string) (y YAID, err error) {
