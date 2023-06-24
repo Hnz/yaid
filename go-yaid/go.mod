@@ -1,4 +1,4 @@
-module github.com/hnz/yaid
+module github.com/hnz/yaid/go-yaid
 
 go 1.19
 

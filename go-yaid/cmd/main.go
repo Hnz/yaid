@@ -12,7 +12,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hnz/yaid"
+	"github.com/hnz/yaid/go-yaid"
 )
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 
 	flag.Parse()
 
-	if len(os.Args) > 1 {
+	if len(flag.Args()) > 1 {
 		fmt.Fprintln(os.Stderr, "Too many arguments")
 		os.Exit(1)
 	}
@@ -33,7 +33,7 @@ func main() {
 		if meta == -1 {
 			rand.Read(r)
 		} else {
-			binary.BigEndian.PutUint16(r, uint16(meta))
+			binary.LittleEndian.PutUint16(r, uint16(meta))
 		}
 
 		y, err := yaid.New(r)
