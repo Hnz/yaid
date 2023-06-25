@@ -8,9 +8,9 @@ const META_BYTES = 1;
 const DEFIDER = 10;
 
 export class YAID {
-	bytes: Uint8Array;
+	bytes: Buffer;
 
-	constructor(private b: Uint8Array) {
+	constructor(b: Buffer) {
 		this.bytes = b;
 	}
 

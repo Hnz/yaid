@@ -12,10 +12,10 @@
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [8080, 6060],
+	//"forwardPorts": [6060],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	//"postCreateCommand": "sudo apt update && sudo apt install -y sqlite3 zstd",
+	"postCreateCommand": "curl -fsSL https://bun.sh/install | bash"
 
 	// Start a godoc server on 6060
 	//"postStartCommand": "go run golang.org/x/tools/cmd/godoc@latest"
