@@ -2,13 +2,21 @@
 
 _Javascript implementation of Yet Another ID_
 
-## Features
+## Install
 
-This package using [bun].
+    npm install yaid
+
+## Develop
+
+This package uses [bun].
 
 ### Build
 
     bun run build
+
+### Lint
+
+    bun lint
 
 ### Test
 

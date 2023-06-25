@@ -1,4 +1,3 @@
-import { Parse } from "./yaid";
+import { New } from "./yaid";
 
-const y = Parse("BJA1W6ST0003V");
-console.log(y.bytes, y.String());
+console.log(New());

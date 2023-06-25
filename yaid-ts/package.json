@@ -1,26 +1,30 @@
 {
 	"name": "yaid-ts",
 	"version": "0.1.0",
+	"type": "module",
 	"description": "Yet Anther ID",
 	"homepage": "github.com/hnz/yaid/yaid-ts",
-	"type": "module",
-	"main": "dist/yaid.js",
-	"bin": "dist/cmd.js",
-	"scripts": {
-		"build": "bun build --outdir=dist --sourcemap=external --minify --splitting yaid.ts cmd.ts",
-		"lint": "eslint . --ignore-pattern=dist",
-		"test": "jest --preset ts-jest --env node"
-	},
-	"repository": {
-		"type": "git",
-		"url": "github.com/hnz/yaid/yaid-ts"
-	},
-	"author": "",
 	"license": "MIT",
+	"author": "Hans van Leeuwen",
+	"main": "yaid",
+	"bin": "cmd.js",
+	"files": [
+		"cmd.js",
+		"cmd.js.map",
+		"yaid.js",
+		"yaid.js.map",
+		"yaid.ts"
+	],
+	"scripts": {
+		"build": "bun build --outdir=. --sourcemap=external --minify --splitting yaid.ts cmd.ts",
+		"lint": "eslint *.ts",
+		"test": "bun test"
+	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.60.0",
 		"@typescript-eslint/parser": "^5.60.0",
 		"bun": "^0.6.9",
+		"bun-types": "^0.6.9",
 		"crockford-base32": "^1.1.0",
 		"eslint": "^8.43.0"
 	}
