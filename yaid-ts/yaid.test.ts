@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "ts-jest";
 import { New, Parse, YAID } from "./yaid";
 
 test("parse", async () => {

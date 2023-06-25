@@ -6,26 +6,20 @@
 	"homepage": "github.com/hnz/yaid/yaid-ts",
 	"license": "MIT",
 	"author": "Hans van Leeuwen",
-	"main": "yaid",
-	"bin": "cmd.js",
-	"files": [
-		"cmd.js",
-		"cmd.js.map",
-		"yaid.js",
-		"yaid.js.map",
-		"yaid.ts"
-	],
+	"module": "yaid.ts",
+	"bin": "dist/cmd.js",
+	"files": "dist",
 	"scripts": {
-		"build": "bun build --outdir=. --sourcemap=external --minify --splitting yaid.ts cmd.ts",
+		"build": "tsc",
 		"lint": "eslint *.ts",
-		"test": "bun test"
+		"test": "jest"
+	},
+	"dependencies": {
+		"crockford-base32": "^1.1.0"
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.60.0",
-		"@typescript-eslint/parser": "^5.60.0",
-		"bun": "^0.6.9",
 		"bun-types": "^0.6.9",
-		"crockford-base32": "^1.1.0",
-		"eslint": "^8.43.0"
+		"ts-jest": "^29.1.0",
+		"typescript": "5"
 	}
 }

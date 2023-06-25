@@ -1,7 +1,8 @@
 import { CrockfordBase32 } from "crockford-base32";
 //import { randomBytes } from "crypto";
+const { getRandomValues } = require("node:crypto").webcrypto;
 
-const crypto = new Crypto();
+//const { getRandomValues } = globalThis.crypto;
 
 const TIME_BYTES = 5;
 const DIFF_BYTES = 2;
@@ -13,10 +14,8 @@ const SIZE = TIME_BYTES + DIFF_BYTES + META_BYTES;
 const DEFIDER = 10;
 
 export class YAID {
-	bytes: Uint8Array;
-
-	constructor(b: Uint8Array) {
-		if (b.length != SIZE) {
+	constructor(private bytes: Uint8Array) {
+		if (bytes.length != SIZE) {
 			throw "bytes length must be " + SIZE;
 		}
 	}
@@ -32,7 +31,7 @@ export class YAID {
 export function New() {
 	const b = new Uint8Array(SIZE);
 	const r = new Uint8Array(DIFF_BYTES);
-	b.set(crypto.getRandomValues(r), TIME_BYTES);
+	b.set(getRandomValues(r), TIME_BYTES);
 	const y = new YAID(b);
 	return y.String();
 }
@@ -41,6 +40,6 @@ export function Parse(yaid: string): YAID {
 	return new YAID(CrockfordBase32.decode(yaid));
 }
 
-function getRandomInt(max) {
+function getRandomInt(max: number) {
 	return Math.floor(Math.random() * max);
 }

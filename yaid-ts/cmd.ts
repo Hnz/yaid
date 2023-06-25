@@ -1,3 +1,3 @@
-import { New } from "./yaid";
+import { New } from "./yaid.js";
 
 console.log(New());
