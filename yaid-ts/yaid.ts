@@ -1,8 +1,10 @@
 import { CrockfordBase32 } from "crockford-base32";
 //import { randomBytes } from "crypto";
-const { getRandomValues } = require("node:crypto").webcrypto;
+//const { getRandomValues } = require("node:crypto").webcrypto;
 
 //const { getRandomValues } = globalThis.crypto;
+import crypto from "crypto";
+const { getRandomValues } =crypto.webcrypto
 
 const TIME_BYTES = 5;
 const DIFF_BYTES = 2;
@@ -31,7 +33,8 @@ export class YAID {
 export function New() {
 	const b = new Uint8Array(SIZE);
 	const r = new Uint8Array(DIFF_BYTES);
-	b.set(getRandomValues(r), TIME_BYTES);
+	//b.set(getRandomValues(r), TIME_BYTES);
+	b.set(randomBytes(TIME_BYTES));
 	const y = new YAID(b);
 	return y.String();
 }
