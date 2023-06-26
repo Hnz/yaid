@@ -24,16 +24,12 @@ export class YAID {
 
     toString(): string {
         const b = Buffer.from(this.bytes);
-        const x = CrockfordBase32.encode(b);
-        console.log(x, b);
-        return x;
+        return CrockfordBase32.encode(b);
     }
 }
 
-export async function New(): Promise<string> {
+export function New(): string {
     const b = new Uint8Array(SIZE);
-    //const randomBytes = await randomFactory();
-
     b.set(globalThis.crypto.getRandomValues(new Uint8Array(DIFF_BYTES)));
 
     const y = new YAID(b);
