@@ -1,5 +1,5 @@
 import { CrockfordBase32 } from "crockford-base32";
-import { randomBytes } from "crypto";
+//import { randomBytes } from "crypto";
 //const { getRandomValues } = require("node:crypto").webcrypto;
 
 //const { getRandomValues } = globalThis.crypto;
@@ -16,34 +16,34 @@ const SIZE = TIME_BYTES + DIFF_BYTES + META_BYTES;
 const DEFIDER = 10;
 
 export class YAID {
-	constructor(private bytes: Uint8Array) {
-		if (bytes.length != SIZE) {
-			throw "bytes length must be " + SIZE;
-		}
-	}
+    constructor(private bytes: Uint8Array) {
+        if (bytes.length != SIZE) {
+            throw "bytes length must be " + SIZE;
+        }
+    }
 
-	toString(): string {
-		const b = Buffer.from(this.bytes);
-		const x = CrockfordBase32.encode(b);
-		console.log(x, b);
-		return x;
-	}
+    toString(): string {
+        const b = Buffer.from(this.bytes);
+        const x = CrockfordBase32.encode(b);
+        console.log(x, b);
+        return x;
+    }
 }
 
 export async function New(): Promise<string> {
-	const b = new Uint8Array(SIZE);
-	const randomBytes = await randomFactory();
+    const b = new Uint8Array(SIZE);
+    //const randomBytes = await randomFactory();
 
-	b.set(randomBytes(TIME_BYTES));
+    b.set(globalThis.crypto.getRandomValues(new Uint8Array(DIFF_BYTES)));
 
-	const y = new YAID(b);
-	return y.toString();
+    const y = new YAID(b);
+    return y.toString();
 }
 
 export function Parse(yaid: string): YAID {
-	return new YAID(CrockfordBase32.decode(yaid));
+    return new YAID(CrockfordBase32.decode(yaid));
 }
-
+/*
 async function randomFactory(): Promise<(size: number) => Buffer> {
 	if (randomBytes) {
 		return randomBytes;
@@ -55,3 +55,4 @@ async function randomFactory(): Promise<(size: number) => Buffer> {
 		throw "Could not find a secure random source";
 	}
 }
+*/
