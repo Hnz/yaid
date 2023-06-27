@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "lib": ["es2021", "dom"],
-        "module": "umd",
+        "module": "commonjs",
         "target": "es2021",
 
         "strict": true,
