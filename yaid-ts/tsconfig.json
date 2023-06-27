@@ -14,5 +14,5 @@
         "declaration": true,
         "outDir": "./dist"
     },
-    "include": ["yaid.ts", "cmd.ts"]
+    "include": ["yaid.ts", "crockford.ts", "cmd.ts"]
 }
