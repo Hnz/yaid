@@ -14,7 +14,7 @@
     //"forwardPorts": [6060],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "npm i -g bun && curl -fsSL https://deno.land/x/install/install.sh | sh"
+    "postCreateCommand": "npm i -g bun esbuild && curl -fsSL https://deno.land/x/install/install.sh | sh"
 
     // Start a godoc server on 6060
     //"postStartCommand": "go run golang.org/x/tools/cmd/godoc@latest"
