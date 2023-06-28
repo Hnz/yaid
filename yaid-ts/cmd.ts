@@ -1,3 +1,3 @@
 import { New } from "./yaid.js";
 
-console.log(New());
+console.log(New().toString());

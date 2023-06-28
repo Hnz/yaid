@@ -1,4 +1,4 @@
-import { base32Decode, base32Encode } from "./crockford";
+import { base32Decode, base32Encode } from "./crockford.js";
 
 const TIME_BYTES = 5;
 const DIFF_BYTES = 2;
@@ -11,19 +11,27 @@ const DEFIDER = 10;
 
 const max_timestamp = 1099511627775;
 
-let c: Crypto = globalThis.crypto || crypto;
-
+const c: Crypto = globalThis.crypto || crypto;
+/*
 // NodeJS < 20 does not support globalThis.
 // Import node.js webcrypto
 if (!c) {
     c = require("crypto").webcrypto;
 }
-
+*/
 export class YAID {
     constructor(private bytes: Uint8Array) {
         if (bytes.byteLength != SIZE) {
             throw new RangeError("bytes length must be " + SIZE);
         }
+    }
+
+    differentiator(): Uint8Array {
+        return this.bytes.slice(TIME_BYTES, TIME_BYTES + DIFF_BYTES);
+    }
+
+    setDifferentiator(d: Uint8Array) {
+        this.bytes.set(d, TIME_BYTES);
     }
 
     meta(): number {
@@ -76,23 +84,33 @@ export class YAID {
     }
 
     toString(): string {
-        const b = Buffer.from(this.bytes);
+        const b = Uint8Array.from(this.bytes);
         return base32Encode(b);
     }
 }
 
-export function New(): YAID {
+export function New(meta?: number): YAID {
     const b = new Uint8Array(SIZE);
 
-    // Fill random buffer and copy it into place
-    const r = new Uint8Array(DIFF_BYTES);
-    b.set(c.getRandomValues(r), TIME_BYTES);
+    b.set(random(DIFF_BYTES), TIME_BYTES);
+
+    if (typeof meta === "undefined") {
+        meta = random(META_BYTES)[0];
+    }
 
     const y = new YAID(b);
     y.setTime(new Date());
+
+    y.setMeta(meta);
     return y;
 }
 
 export function Parse(yaid: string): YAID {
     return new YAID(base32Decode(yaid));
+}
+
+// Return n bytes of random data
+function random(n: number): Uint8Array {
+    const m = new Uint8Array(n);
+    return c.getRandomValues(m);
 }
