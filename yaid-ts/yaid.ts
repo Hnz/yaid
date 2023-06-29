@@ -9,7 +9,7 @@ const SIZE = TIME_BYTES + DIFF_BYTES + META_BYTES;
 // 1 for miliseconds, 10 for centiseconds, 1000 for seconds, etc.
 const DEFIDER = 10;
 
-const max_timestamp = 1099511627775;
+export const MAX_TIMESTAMP = 1099511627775;
 
 const c: Crypto = globalThis.crypto || crypto;
 /*
@@ -19,10 +19,11 @@ if (!c) {
     c = require("crypto").webcrypto;
 }
 */
+
 export class YAID {
-    constructor(private bytes: Uint8Array) {
+    constructor(private bytes = new Uint8Array(SIZE)) {
         if (bytes.byteLength != SIZE) {
-            throw new RangeError("bytes length must be " + SIZE);
+            throw new RangeError("bytes length must be " + SIZE + " not " + bytes.byteLength);
         }
     }
 
@@ -68,8 +69,8 @@ export class YAID {
 
     // Set the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC
     setTimestamp(t: number) {
-        if (t > max_timestamp) {
-            throw new Error("timestamp must not be greater than " + max_timestamp);
+        if (t > MAX_TIMESTAMP) {
+            throw new Error("timestamp must not be greater than " + MAX_TIMESTAMP);
         }
 
         this.bytes[0] = t >> 32;
@@ -77,6 +78,8 @@ export class YAID {
         this.bytes[2] = t >> 16;
         this.bytes[3] = t >> 8;
         this.bytes[4] = t;
+
+        //console.log(t >> 32, t >> 24, t >> 16, t >> 8, t, "\n", this.bytes);
     }
 
     toBytes(): Uint8Array {
@@ -89,24 +92,29 @@ export class YAID {
     }
 }
 
-export function New(meta?: number): YAID {
-    const b = new Uint8Array(SIZE);
-
-    b.set(random(DIFF_BYTES), TIME_BYTES);
-
+/**
+ * New YAID
+ * @param meta
+ * @param size Size of the id in bytes
+ * @param time
+ * @returns YAID
+ */
+export function New(meta?: number, size = 8, time = new Date()): YAID {
     if (typeof meta === "undefined") {
         meta = random(META_BYTES)[0];
     }
 
-    const y = new YAID(b);
-    y.setTime(new Date());
-
+    const y = new YAID();
+    y.setTime(time);
+    y.setDifferentiator(random(DIFF_BYTES));
     y.setMeta(meta);
+
     return y;
 }
 
 export function Parse(yaid: string): YAID {
-    return new YAID(base32Decode(yaid));
+    const b = base32Decode(yaid);
+    return new YAID(new Uint8Array(b));
 }
 
 // Return n bytes of random data

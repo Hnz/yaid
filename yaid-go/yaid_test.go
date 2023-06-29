@@ -22,6 +22,7 @@ func Example() {
 
 	fmt.Println("yaid: ", y)
 	fmt.Println("int:  ", y.Int())
+	fmt.Println("bytes:", y[:])
 	fmt.Println("time: ", y.Time().UTC())
 	fmt.Println("shard:", y.Meta())
 
@@ -38,6 +39,7 @@ func Example() {
 	//
 	// yaid:  BJA1W6ST0003V
 	// int:   13341980100657152123
+	// bytes: [185 40 60 54 116 0 0 123]
 	// time:  2222-01-02 03:04:05 +0000 UTC
 	// shard: [123]
 	// time:  2222-01-02 03:04:05 +0000 UTC
