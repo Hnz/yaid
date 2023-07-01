@@ -72,14 +72,16 @@ export class YAID {
         if (t > MAX_TIMESTAMP) {
             throw new Error("timestamp must not be greater than " + MAX_TIMESTAMP);
         }
-
+        /*
         this.bytes[0] = t >> 32;
-        this.bytes[1] = t >> 24;
-        this.bytes[2] = t >> 16;
-        this.bytes[3] = t >> 8;
-        this.bytes[4] = t;
-
-        //console.log(t >> 32, t >> 24, t >> 16, t >> 8, t, "\n", this.bytes);
+        this.bytes[1] = (t >> 24) & 255;
+        this.bytes[2] = (t >> 16) & 255;
+        this.bytes[3] = (t >> 8) & 255;
+        this.bytes[4] = t & 255;
+*/
+        for (let i = 0, j = 1; i < TIME_BYTES; i++, j *= 0x100) {
+            this.bytes[4 - i] = (t / j) & 0xff;
+        }
     }
 
     toBytes(): Uint8Array {
