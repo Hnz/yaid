@@ -40,6 +40,10 @@ export class YAID {
 		return this.bytes[TIME_BYTES + DIFF_BYTES];
 	}
 
+	/**
+	 * Set meta data
+	 * @param number between 0 and 255
+	 */
 	setMeta(i: number) {
 		if (i < 0 || i > 255) {
 			throw new RangeError("meta must be within 0-255");
@@ -57,7 +61,7 @@ export class YAID {
 		this.setTimestamp(cs);
 	}
 
-	// Time as hundredth of a second since January 1, 1970 12:00:00 AM UTC
+	/** Time as hundredth of a second since January 1, 1970 12:00:00 AM UTC */
 	timestamp(): number {
 		return (
 			this.bytes[4] |
@@ -68,7 +72,7 @@ export class YAID {
 		);
 	}
 
-	// Set the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC
+	/** Set the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC */
 	setTimestamp(t: number) {
 		if (t > MAX_TIMESTAMP) {
 			throw new Error("timestamp must not be greater than " + MAX_TIMESTAMP);
@@ -91,7 +95,7 @@ export class YAID {
 
 	toString(): string {
 		const b = Uint8Array.from(this.bytes);
-		return base32Encode(b, "Crockford");
+		return base32Encode(b);
 	}
 }
 
@@ -116,7 +120,7 @@ export function New(meta?: number, size = 8, time = new Date()): YAID {
 }
 
 export function Parse(yaid: string): YAID {
-	const b = base32Decode(yaid, "Crockford");
+	const b = base32Decode(yaid);
 	return new YAID(new Uint8Array(b));
 }
 
