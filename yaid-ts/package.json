@@ -1,27 +1,28 @@
 {
-    "name": "yaid-ts",
-    "version": "0.1.0",
-    "description": "Yet Anther ID",
-    "homepage": "github.com/hnz/yaid/yaid-ts",
-    "license": "MIT",
-    "author": "Hans van Leeuwen",
-    "bin": "dist/cmd.js",
-    "files": "dist",
-    "type": "module",
-    "scripts": {
-        "build": "tsc",
-        "lint": "eslint *.ts",
-        "test": "jest"
-    },
-    "devDependencies": {
-        "@tsconfig/node20": "^1.0.2",
-        "@typescript-eslint/eslint-plugin": "^5.60.0",
-        "@typescript-eslint/parser": "^5.60.0",
-        "eslint": "^8.43.0",
-        "jest": "^29.5.0",
-        "ts-jest": "^29.1.0"
-    },
-    "engines": {
-        "node": ">=20.0.0"
-    }
+	"name": "yaid",
+	"version": "0.1.0",
+	"description": "Yet Anther ID",
+	"homepage": "github.com/hnz/yaid/yaid-ts",
+	"license": "MIT",
+	"author": "Hans van Leeuwen",
+	"bin": "dist/cmd.js",
+	"files": "dist",
+	"type": "module",
+	"main": "yaid",
+	"scripts": {
+		"build": "tsc && rm dist/cmd.d.ts dist/crockford.d.ts",
+		"lint": "eslint *.ts",
+		"test": "jest"
+	},
+	"devDependencies": {
+		"@tsconfig/node20": "^1.0.2",
+		"@typescript-eslint/eslint-plugin": "^5.60.0",
+		"@typescript-eslint/parser": "^5.60.0",
+		"eslint": "^8.43.0",
+		"jest": "^29.5.0",
+		"ts-jest": "^29.1.0"
+	},
+	"engines": {
+		"node": ">=20.0.0"
+	}
 }

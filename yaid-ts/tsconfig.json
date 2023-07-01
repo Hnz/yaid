@@ -1,9 +1,10 @@
 {
-    "extends": "@tsconfig/node20",
-    "compilerOptions": {
-        "lib": ["DOM"],
-        "declaration": true,
-        "outDir": "./dist"
-    },
-    "include": ["yaid.ts", "crockford.ts", "cmd.ts"]
+	"extends": "@tsconfig/node20",
+	"compilerOptions": {
+		"lib": ["DOM", "es2023"],
+		"declaration": true,
+		"sourceMap": true,
+		"outDir": "./dist"
+	},
+	"include": ["yaid.ts", "crockford.ts", "cmd.ts"]
 }
