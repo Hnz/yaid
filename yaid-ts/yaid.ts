@@ -94,8 +94,7 @@ export class YAID {
 	}
 
 	toString(): string {
-		const b = Uint8Array.from(this.bytes);
-		return base32Encode(b);
+		return base32Encode(this.bytes);
 	}
 }
 
@@ -121,7 +120,7 @@ export function New(meta?: number, size = 8, time = new Date()): YAID {
 
 export function Parse(yaid: string): YAID {
 	const b = base32Decode(yaid);
-	return new YAID(new Uint8Array(b));
+	return new YAID(b);
 }
 
 // Return n bytes of random data

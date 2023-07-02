@@ -28,6 +28,7 @@
 	},
 	"files": [
 		"cmd.js",
+		"crockford.ts",
 		"yaid.js",
 		"yaid.js.map",
 		"yaid.ts"

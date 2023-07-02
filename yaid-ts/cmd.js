@@ -1,3 +1,4 @@
 import { New } from "./yaid.js";
 
-console.log(New().toString());
+const y = New().toString();
+console.log(y);

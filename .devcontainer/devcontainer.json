@@ -8,13 +8,13 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/go:1": {}
-	}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	//"forwardPorts": [6060],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	//"postCreateCommand": "npm i -g bun esbuild && curl -fsSL https://deno.land/x/install/install.sh | sh"
+	"postCreateCommand": "curl -fsSL https://deno.land/x/install/install.sh | sh"
 
 	// Start a godoc server on 6060
 	//"postStartCommand": "go run golang.org/x/tools/cmd/godoc@latest"
