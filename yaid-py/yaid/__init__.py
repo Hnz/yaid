@@ -1,4 +1,25 @@
-import base64
+"""
+YAID package
+
+bla die bla.
+
+>>> from yaid import YAID
+>>> from datetime import datetime
+>>> y = YAID()
+>>> print(y)
+0000000000000
+>>> y.set_meta(123)
+>>> y.meta()
+123
+>>> print(y)
+000000000007P
+>>> d = datetime(2222, 1, 2, 3, 4, 5, 6)
+>>> y.set_time(d)
+>>> y.time()
+datetime.datetime(2222, 1, 2, 3, 4, 5, 6)
+"""
+
+import krock32
 import os
 from datetime import datetime
 from typing import Optional
@@ -14,10 +35,12 @@ DEFIDER: int = 10
 MAX_TIMESTAMP: int = 1099511627775
 
 class YAID:
-    def __init__(self, bytes_array: bytearray) -> None:
+    bytes: bytearray
+
+    def __init__(self, bytes_array= bytearray([0,0,0,0,0,0,0,0])) -> None:
         if len(bytes_array) != SIZE:
             raise ValueError(f"bytes length must be {SIZE} not {len(bytes_array)}")
-        self.bytes: bytearray = bytes_array
+        self.bytes = bytes_array
 
     def differentiator(self) -> bytearray:
         return self.bytes[TIME_BYTES:TIME_BYTES + DIFF_BYTES]
@@ -54,18 +77,17 @@ class YAID:
         for i in range(TIME_BYTES):
             self.bytes[TIME_BYTES - 1 - i] = (t >> (i * 8)) & 0xFF
 
-    def to_bytes(self) -> bytearray:
-        return self.bytes
+    def __str__(self) -> str:
+        encoder = krock32.Encoder(checksum=False)
+        encoder.update(self.bytes)
+        return encoder.finalize()
 
-    def to_string(self) -> str:
-        return base64.b32encode(self.bytes).decode()
 
-
-def New(meta: Optional[int] = None, size: int = 8, time: Optional[datetime] = None) -> YAID:
+def new(meta: Optional[int] = None, size: int = 8, time: Optional[datetime] = None) -> YAID:
     if meta is None:
         meta = _random_bytes(META_BYTES)[0]
 
-    y: YAID = YAID(bytearray(SIZE))
+    y = YAID(bytearray(SIZE))
     y.set_time(time or datetime.utcnow())
     y.set_differentiator(_random_bytes(DIFF_BYTES))
     y.set_meta(meta)
@@ -73,22 +95,11 @@ def New(meta: Optional[int] = None, size: int = 8, time: Optional[datetime] = No
     return y
 
 
-def Parse(yaid: str) -> YAID:
-    b: bytes = base64.b32decode(yaid)
+def parse(yaid: str) -> YAID:
+    decoder = krock32.Decoder(strict=True, checksum=False)
+    b: bytes = decoder.update(yaid)
     return YAID(bytearray(b))
 
 
 def _random_bytes(n: int) -> bytearray:
     return bytearray(os.urandom(n))
-
-
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--check-clean", action="store_true", help="Check if the working tree is clean."
-    )
-    arguments = parser.parse_args()
-
-    print(New().to_string())
