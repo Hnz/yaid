@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Meta tags -->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="width=device-width" name="viewport" />
+		<meta name="viewport" content="width=device-width" />
+
+		<!-- Favicon and title -->
+		<title>YAID</title>
+		<link rel="icon" href="/_/logo.svg" />
+
+		<link rel="stylesheet" href="https://unpkg.com/chota@latest" />
+	</head>
+	<body>
+		<div class="container">
+			<nav class="nav">
+				<div class="nav-left">
+					<a class="active">Link 1</a>
+					<a>Link 2</a>
+				</div>
+				<div class="nav-center">
+					<a class="brand">
+						<img src="logo.svg" alt="" />
+					</a>
+				</div>
+				<div class="nav-right">
+					<a href="javascript:void(0)" id="theme-switch" onclick="switchMode(this)">☀️</a>
+				</div>
+			</nav>
+
+			<h1>🆔 YAID</h1>
+			<div>
+				<i>Yet Another ID</i>
+			</div>
+
+			<p></p>
+
+			<div class="row">
+				<div class="card col-6-md bg-dark">
+					<header>
+						<h4>Card title</h4>
+					</header>
+					<input
+						id="yaid"
+						type="text"
+						minlength="8"
+						oninput="y = Parse(yaid.value); update()"
+					/>
+				</div>
+				<div class="card col-6-md bg-primary">
+					<header>
+						<h4>Card title</h4>
+					</header>
+					<p>Time: <span id="time"></span></p>
+					<p>Meta: <span id="meta"></span></p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+				document.body.classList.add("dark");
+				document.querySelector("#theme-switch").innerHTML = "🌙";
+			}
+
+			function switchMode(el) {
+				const bodyClass = document.body.classList;
+				bodyClass.contains("dark")
+					? ((el.innerHTML = "☀️"), bodyClass.remove("dark"))
+					: ((el.innerHTML = "🌙"), bodyClass.add("dark"));
+			}
+
+			var exports = {};
+		</script>
+
+		<script type="module">
+			import { YAID, New, Parse } from "http://localhost:8000/yaid-ts/dist/yaid.js";
+
+			function update() {
+				time.innerText = y.time();
+				meta.innerText = y.meta();
+			}
+
+			const y = New();
+			yaid.value = y;
+
+			update();
+		</script>
+
+		<style>
+			body.dark {
+				--bg-color: #000;
+				--bg-secondary-color: #131316;
+				--font-color: #f5f5f5;
+				--color-grey: #ccc;
+				--color-darkGrey: #777;
+			}
+		</style>
+	</body>
+</html>
