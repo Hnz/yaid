@@ -57,8 +57,8 @@ test("set and get time", async () => {
 	const d = new Date(2222, 1, 2, 3, 4, 5, 6);
 
 	y.setTime(d);
-	expect(y.toBytes()).toEqual(new Uint8Array([185, 56, 51, 32, 116, 0, 0, 0]));
-	//expect(y.timestamp()).toEqual(942874877);
+	expect(y.toBytes()).toEqual(new Uint8Array([185, 40, 60, 54, 121, 0, 0, 0]));
+	expect(y.timestamp()).toEqual(795243984505);
 	expect(y.time()).toEqual(d);
 });
 

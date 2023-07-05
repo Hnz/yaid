@@ -16,7 +16,7 @@ import (
 
 func Example() {
 	y := yaid.YAID{}
-	t := time.Date(2222, 1, 2, 3, 4, 5, 6, time.UTC)
+	t := time.Date(2222, 1, 2, 3, 4, 5, 54321, time.UTC)
 	y.SetTime(t)
 	y.SetMeta([]byte{123})
 

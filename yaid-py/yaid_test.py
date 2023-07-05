@@ -1,3 +1,4 @@
+from datetime import datetime
 import unittest
 import doctest
 import yaid
@@ -25,6 +26,13 @@ class TestYAID(unittest.TestCase):
 
         self.assertRaises(ValueError, y.set_meta, 256)
         self.assertRaises(ValueError, y.set_meta, -1)
+
+    def test_time(self):
+        y = yaid.YAID()
+        y.set_time(datetime(2222, 1, 2, 3, 4, 5, 54321))
+        self.assertEqual(y.bytes, bytearray([185, 40, 60, 54, 121, 0, 0, 0]))
+        self.assertEqual(y.timestamp(), 795243984505)
+        self.assertEqual(y.time(), datetime(2222, 1, 2, 3, 4, 5, 50000))
 
     def test_timestamp(self):
         y = yaid.YAID()
