@@ -21,6 +21,7 @@ Example of low-level usage:
 datetime.datetime(2222, 1, 2, 3, 4, 5, 50000)
 """
 
+import argparse
 import krock32
 import os
 from datetime import datetime
@@ -122,3 +123,33 @@ def parse(yaid: str) -> YAID:
 
 def _random_bytes(n: int) -> bytearray:
     return bytearray(os.urandom(n))
+
+
+def main():
+    """Run the commandline application"""
+    parser = argparse.ArgumentParser(description="Yet Another ID")
+    parser.add_argument(
+        "-i",
+        "--info",
+        type=str,
+        help="print info on the given id",
+    )
+    parser.add_argument(
+        "-m",
+        "--meta",
+        type=int,
+        help="number beteen 0-255. Defaults to a random value.",
+    )
+    arguments = parser.parse_args()
+
+    if arguments.info:
+        y = parse(arguments.info)
+        print("Time:", y.time())
+        print("Meta:", y.meta())
+    else:
+        y = new(arguments.meta)
+        print(y)
+
+
+if __name__ == "__main__":
+    main()
