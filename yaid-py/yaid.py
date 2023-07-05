@@ -2,23 +2,6 @@
 YAID package
 
 bla die bla.
-
-Example of low-level usage:
-
->>> from yaid import YAID
->>> from datetime import datetime
->>> y = YAID()
->>> print(y)
-0000000000000
->>> y.set_meta(123)
->>> y.meta()
-123
->>> print(y)
-000000000007P
->>> d = datetime(2222, 1, 2, 3, 4, 5, 54321)
->>> y.set_time(d)
->>> y.time()
-datetime.datetime(2222, 1, 2, 3, 4, 5, 50000)
 """
 
 import argparse
@@ -35,12 +18,32 @@ SIZE: int = TIME_BYTES + DIFF_BYTES + META_BYTES
 
 DEFIDER: int = 10
 
-""" Maximum value of the timestamp """
+"""Maximum value of the timestamp"""
 MAX_TIMESTAMP: int = 1099511627775
 
 
 class YAID:
-    """Yet Another ID"""
+    """
+    Yet Another ID
+
+    >>> from yaid import YAID
+    >>> from datetime import datetime
+    >>> y = YAID()
+    >>> print(y)
+    0000000000000
+    >>> y.set_meta(123)
+    >>> y.meta()
+    123
+    >>> print(y)
+    000000000007P
+    >>> y.set_differentiator(bytearray([1,255]))
+    >>> print(y)
+    0000000007ZQP
+    >>> d = datetime(2222, 1, 2, 3, 4, 5, 54321)
+    >>> y.set_time(d)
+    >>> y.time()
+    datetime.datetime(2222, 1, 2, 3, 4, 5, 50000)
+    """
 
     bytes: bytearray
 
@@ -70,6 +73,9 @@ class YAID:
         self.bytes[TIME_BYTES + DIFF_BYTES] = i
 
     def time(self) -> datetime:
+        """
+        Return the date and time with a percision of a hundredth of a second
+        """
         ms = self.timestamp() * DEFIDER
         return datetime.utcfromtimestamp(ms / 1000.0)
 
@@ -97,14 +103,22 @@ class YAID:
             self.bytes[TIME_BYTES - 1 - i] = (t >> (i * 8)) & 0xFF
 
     def __str__(self) -> str:
+        """
+        Return id as a crockford base32-encoded string
+        """
         encoder = krock32.Encoder(checksum=False)
         encoder.update(self.bytes)
         return encoder.finalize()
 
 
-def new(meta: Optional[int] = None, size: int = 8, time=datetime.utcnow()) -> YAID:
+def new(meta: Optional[int] = None, time: Optional[datetime] = None) -> YAID:
+    """
+    Return a new random id
+    """
     if meta is None:
         meta = _random_bytes(META_BYTES)[0]
+    if time is None:
+        time = datetime.utcnow()
 
     y = YAID(bytearray(SIZE))
     y.set_time(time)
@@ -115,6 +129,9 @@ def new(meta: Optional[int] = None, size: int = 8, time=datetime.utcnow()) -> YA
 
 
 def parse(yaid: str) -> YAID:
+    """
+    Create a YAID object from an encoded string
+    """
     decoder = krock32.Decoder(strict=True, checksum=False)
     decoder.update(yaid)
     b = decoder.finalize()

@@ -9,13 +9,22 @@ def load_tests(loader, tests, ignore):
     return tests
 
 
-class TestStringMethods(unittest.TestCase):
+class TestYAID(unittest.TestCase):
     def test_upper(self):
         self.assertEqual("foo".upper(), "FOO")
 
-    def test_isupper(self):
-        self.assertTrue("FOO".isupper())
-        self.assertFalse("Foo".isupper())
+    def test_meta(self):
+        y = yaid.YAID()
+        self.assertEqual(y.meta(), 0)
+
+        y.set_meta(123)
+        self.assertEqual(y.meta(), 123)
+
+        y.set_meta(255)
+        self.assertEqual(y.meta(), 255)
+
+        self.assertRaises(ValueError, y.set_meta, 256)
+        self.assertRaises(ValueError, y.set_meta, -1)
 
     def test_timestamp(self):
         y = yaid.YAID()
