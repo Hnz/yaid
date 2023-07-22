@@ -8,7 +8,7 @@ _Python implementation of Yet Another ID_
 
 ## Test
 
-    python3 yaid_test.py
+    python3 -m test
 
 ## Command line
 
