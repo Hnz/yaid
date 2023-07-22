@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 	<head>
 		<!-- Meta tags -->
 		<meta charset="utf-8" />
@@ -11,52 +11,74 @@
 		<title>YAID</title>
 		<link rel="icon" href="/_/logo.svg" />
 
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+		/>
+
+		<!--
 		<link rel="stylesheet" href="https://unpkg.com/chota@latest" />
+		-->
 	</head>
 	<body>
 		<div class="container">
-			<nav class="nav">
-				<div class="nav-left">
-					<a class="active">Link 1</a>
-					<a>Link 2</a>
-				</div>
-				<div class="nav-center">
-					<a class="brand">
-						<img src="logo.svg" alt="" />
-					</a>
-				</div>
-				<div class="nav-right">
-					<a href="javascript:void(0)" id="theme-switch" onclick="switchMode(this)">☀️</a>
-				</div>
+			<nav class="container-fluid">
+				<ul>
+					<li>
+						<a href="./" class="contrast" onclick="switchMode(this)"
+							><strong>🆔 YAID</strong></a
+						>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<details role="list" dir="rtl">
+							<summary aria-haspopup="listbox" role="link" class="secondary">
+								Theme
+							</summary>
+							<ul role="listbox">
+								<li><a href="#" data-theme-switcher="auto">Auto</a></li>
+								<li><a href="#" data-theme-switcher="light">Light</a></li>
+								<li><a href="#" data-theme-switcher="dark">Dark</a></li>
+							</ul>
+						</details>
+					</li>
+					<li>
+						<details role="list" dir="rtl">
+							<summary aria-haspopup="listbox" role="link" class="secondary">
+								Examples (v1)
+							</summary>
+							<ul role="listbox">
+								<li><a href="../v1-preview/">Preview</a></li>
+								<li><a href="../v1-preview-rtl/">Right-to-left</a></li>
+								<li><a href="../v1-classless/">Classless</a></li>
+								<li><a href="../v1-basic-template/">Basic template</a></li>
+								<li><a href="../v1-company/">Company</a></li>
+								<li><a href="../v1-google-amp/">Google Amp</a></li>
+								<li><a href="../v1-sign-in/">Sign in</a></li>
+								<li><a href="../v1-bootstrap-grid/">Bootstrap grid</a></li>
+							</ul>
+						</details>
+					</li>
+				</ul>
 			</nav>
 
-			<h1>🆔 YAID</h1>
 			<div>
 				<i>Yet Another ID</i>
 			</div>
 
-			<p></p>
-
-			<div class="row">
-				<div class="card col-6-md bg-grey">
-					<header>
-						<h4>Card title</h4>
-					</header>
-					<input
-						id="yaid"
-						type="text"
-						minlength="8"
-						oninput="y = Parse(yaid.value); update()"
-					/>
-				</div>
-				<div class="card col-6-md bg-primary">
-					<header>
-						<h4>Card title</h4>
-					</header>
-					<p>Time: <span id="time"></span></p>
-					<p>Meta: <span id="meta"></span></p>
-					<p>Bytes: [<span id="bytes"></span>]</p>
-				</div>
+			<div class="grid">
+				<article>
+					<header>YAID</header>
+					<input id="yaid" type="text" minlength="8" oninput="update()" />
+					<button onclick="generate()">Generate</button>
+				</article>
+				<article>
+					<header>Info</header>
+					<b>Time:</b> <span id="time"></span><br />
+					<b>Meta:</b> <span id="meta"></span><br />
+					<b>Bytes:</b> [<span id="bytes"></span>]<br />
+				</article>
 			</div>
 
 			<h2>Specifications</h2>
@@ -64,43 +86,31 @@
 			REPLACE_ME
 		</div>
 
-		<script>
-			if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-				document.body.classList.add("dark");
-				document.querySelector("#theme-switch").innerHTML = "🌙";
-			}
-
-			function switchMode(el) {
-				const bodyClass = document.body.classList;
-				bodyClass.contains("dark")
-					? ((el.innerHTML = "☀️"), bodyClass.remove("dark"))
-					: ((el.innerHTML = "🌙"), bodyClass.add("dark"));
-			}
-		</script>
-
 		<script type="module">
-			import { YAID, New, Parse } from "http://localhost:8000/yaid-ts/yaid.js";
+			import { New, Parse } from "./yaid-ts/yaid.js";
 
-			function update() {
-				time.innerText = y.time();
+			function updateInfo(y) {
+				time.innerText = y.time().toUTCString();
 				meta.innerText = y.meta();
 				bytes.innerText = y.bytes;
 			}
 
-			const y = New();
-			yaid.value = y;
+			window.generate = function () {
+				const y = New();
+				updateInfo(y);
+				yaid.value = y;
+			};
 
-			update();
+			window.update = function () {
+				try {
+					const y = Parse(yaid.value);
+					updateInfo(y);
+				} catch (err) {
+					//
+				}
+			};
+
+			generate();
 		</script>
-
-		<style>
-			body.dark {
-				--bg-color: #000;
-				--bg-secondary-color: #131316;
-				--font-color: #f5f5f5;
-				--color-grey: #ccc;
-				--color-darkGrey: #777;
-			}
-		</style>
 	</body>
 </html>
