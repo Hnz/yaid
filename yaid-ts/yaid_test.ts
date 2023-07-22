@@ -54,12 +54,12 @@ test("set and get timestamp", async () => {
 
 test("set and get time", async () => {
 	const y = new YAID();
-	const d = new Date(2222, 1, 2, 3, 4, 5, 6);
+	const d = new Date(2222, 1, 2, 3, 4, 5, 54321);
 
 	y.setTime(d);
 	expect(y.toBytes()).toEqual(new Uint8Array([185, 40, 60, 54, 121, 0, 0, 0]));
+	expect(y.time()).toEqual(new Date(2222, 1, 2, 3, 4, 5, 50000));
 	expect(y.timestamp()).toEqual(795243984505);
-	expect(y.time()).toEqual(d);
 });
 
 test("parse with incorrect length", async () => {

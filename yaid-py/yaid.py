@@ -143,7 +143,9 @@ def _random_bytes(n: int) -> bytearray:
 
 
 def main():
-    """Run the commandline application"""
+    """
+    Run the commandline application
+    """
     parser = argparse.ArgumentParser(description="Yet Another ID")
     parser.add_argument(
         "-i",

@@ -11,8 +11,9 @@ def load_tests(loader, tests, ignore):
 
 
 class TestYAID(unittest.TestCase):
-    def test_upper(self):
-        self.assertEqual("foo".upper(), "FOO")
+    def test_parse(self):
+        y = yaid.parse("4X7BMTC6T6XEW")
+        self.assertEqual(y.bytes, bytearray([39, 78, 186, 105, 134, 209, 186, 238]))
 
     def test_meta(self):
         y = yaid.YAID()

@@ -13,14 +13,6 @@ export const MAX_TIMESTAMP = 1099511627775;
 
 const c: Crypto = globalThis.crypto || crypto;
 
-/*
-// NodeJS < 20 does not support globalThis.
-// Import node.js webcrypto
-if (!c) {
-    c = require("crypto").webcrypto;
-}
-*/
-
 export class YAID {
 	constructor(private bytes = new Uint8Array(SIZE)) {
 		if (bytes.byteLength != SIZE) {

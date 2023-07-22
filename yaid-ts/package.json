@@ -5,13 +5,13 @@
 	"homepage": "github.com/hnz/yaid/yaid-ts",
 	"license": "MIT",
 	"author": "Hans van Leeuwen",
-	"bin": "dist/cmd.js",
+	"bin": "cmd.js",
 	"type": "module",
 	"main": "yaid",
 	"scripts": {
 		"build": "bun build yaid.ts --outdir . --sourcemap external",
 		"docs": "typedoc --plugin typedoc-plugin-markdown --out docs yaid.ts",
-		"lint": "eslint *.ts",
+		"lint": "eslint *.ts cmd.js",
 		"test": "bun test"
 	},
 	"devDependencies": {
@@ -24,7 +24,7 @@
 		"typedoc-plugin-markdown": "^3.15.3"
 	},
 	"engines": {
-		"node": ">=20.0.0"
+		"node": ">=20"
 	},
 	"files": [
 		"cmd.js",

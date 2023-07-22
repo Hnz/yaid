@@ -1,6 +1,8 @@
 __pycache__/
 yaid.egg-info/
+build/
 dist/
+docs/
 node_modules/
 package-lock.json
 yaid.js
