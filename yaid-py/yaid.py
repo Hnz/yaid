@@ -18,31 +18,33 @@ SIZE: int = TIME_BYTES + DIFF_BYTES + META_BYTES
 
 DEFIDER: int = 10
 
-"""Maximum value of the timestamp"""
 MAX_TIMESTAMP: int = 1099511627775
+"""Maximum value of the timestamp"""
 
 
 class YAID:
     """
     Yet Another ID
 
-    >>> from yaid import YAID
-    >>> from datetime import datetime
-    >>> y = YAID()
-    >>> print(y)
-    0000000000000
-    >>> y.set_meta(123)
-    >>> y.meta()
-    123
-    >>> print(y)
-    000000000007P
-    >>> y.set_differentiator(bytearray([1,255]))
-    >>> print(y)
-    0000000007ZQP
-    >>> d = datetime(2222, 1, 2, 3, 4, 5, 54321)
-    >>> y.set_time(d)
-    >>> y.time()
-    datetime.datetime(2222, 1, 2, 3, 4, 5, 50000)
+        >>> from yaid import YAID
+        >>> from datetime import datetime
+        >>> y = YAID()
+        >>> print(y)
+        0000000000000
+        >>> y.set_meta(123)
+        >>> y.meta()
+        123
+        >>> print(y)
+        000000000007P
+        >>> y.set_differentiator(bytearray([1,255]))
+        >>> print(y)
+        0000000007ZQP
+        >>> d = datetime(2222, 1, 2, 3, 4, 5, 54321)
+        >>> y.set_time(d)
+        >>> y.time()
+        datetime.datetime(2222, 1, 2, 3, 4, 5, 50000)
+        >>> print(y)
+        Q4M3RDKS07ZQP
     """
 
     bytes: bytearray

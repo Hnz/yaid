@@ -38,3 +38,7 @@ Show info
 
     from yaid import new
     id = new()
+
+## Building the documentation
+
+    pydoc-markdown -p yaid > dist/yaid.md
