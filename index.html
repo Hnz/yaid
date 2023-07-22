@@ -1,77 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 	<head>
-		<!-- Meta tags -->
 		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta content="width=device-width" name="viewport" />
-		<meta name="viewport" content="width=device-width" />
-
-		<!-- Favicon and title -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>YAID</title>
-		<link rel="icon" href="/_/logo.svg" />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🆔</text></svg>"
+		/>
 
 		<link
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
 		/>
 
-		<!--
-		<link rel="stylesheet" href="https://unpkg.com/chota@latest" />
-		-->
+		<script type="module">
+			import { New, Parse } from "./yaid-ts/yaid.js";
+
+			function showError(err) {
+				if (err) {
+					yaid.setAttribute("aria-invalid", "true");
+					errorBox.style.display = "block";
+					errorBox.innerText = err;
+				} else {
+					yaid.setAttribute("aria-invalid", "false");
+					errorBox.style.display = "none";
+				}
+			}
+
+			function updateInfo(y) {
+				time.innerText = y.time().toUTCString();
+				meta.innerText = y.meta();
+				bytes.innerText = y.bytes;
+			}
+
+			window.update = function () {
+				console.log("UPDATE");
+				try {
+					const y = Parse(yaid.value);
+					updateInfo(y);
+					showError();
+				} catch (err) {
+					showError(err);
+				}
+			};
+
+			window.generate = function () {
+				const y = New();
+				yaid.value = y;
+				updateInfo(y);
+			};
+
+			generate();
+		</script>
 	</head>
 	<body>
-		<div class="container">
-			<nav class="container-fluid">
-				<ul>
-					<li>
-						<a href="./" class="contrast" onclick="switchMode(this)"
-							><strong>🆔 YAID</strong></a
-						>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<details role="list" dir="rtl">
-							<summary aria-haspopup="listbox" role="link" class="secondary">
-								Theme
-							</summary>
-							<ul role="listbox">
-								<li><a href="#" data-theme-switcher="auto">Auto</a></li>
-								<li><a href="#" data-theme-switcher="light">Light</a></li>
-								<li><a href="#" data-theme-switcher="dark">Dark</a></li>
-							</ul>
-						</details>
-					</li>
-					<li>
-						<details role="list" dir="rtl">
-							<summary aria-haspopup="listbox" role="link" class="secondary">
-								Examples (v1)
-							</summary>
-							<ul role="listbox">
-								<li><a href="../v1-preview/">Preview</a></li>
-								<li><a href="../v1-preview-rtl/">Right-to-left</a></li>
-								<li><a href="../v1-classless/">Classless</a></li>
-								<li><a href="../v1-basic-template/">Basic template</a></li>
-								<li><a href="../v1-company/">Company</a></li>
-								<li><a href="../v1-google-amp/">Google Amp</a></li>
-								<li><a href="../v1-sign-in/">Sign in</a></li>
-								<li><a href="../v1-bootstrap-grid/">Bootstrap grid</a></li>
-							</ul>
-						</details>
-					</li>
-				</ul>
-			</nav>
+		<nav class="container-fluid">
+			<ul>
+				<li>
+					<a href="./" class="contrast">
+						<b>🆔 YAID</b>
+					</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<details role="list">
+						<summary aria-haspopup="listbox" role="link" class="secondary">
+							Examples (v1)
+						</summary>
+						<ul role="listbox">
+							<li><a href="yaid-js">Preview</a></li>
+							<li><a href="../v1-preview-rtl/">Right-to-left</a></li>
+							<li><a href="../v1-classless/">Classless</a></li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</nav>
 
-			<div>
-				<i>Yet Another ID</i>
-			</div>
+		<div class="container">
+			<i>Yet Another ID</i>
 
 			<div class="grid">
 				<article>
 					<header>YAID</header>
-					<input id="yaid" type="text" minlength="8" oninput="update()" />
+					<input id="yaid" type="text" min="8" oninput="update()" />
 					<button onclick="generate()">Generate</button>
+					<mark id="errorBox"></mark>
 				</article>
 				<article>
 					<header>Info</header>
@@ -85,32 +101,5 @@
 
 			REPLACE_ME
 		</div>
-
-		<script type="module">
-			import { New, Parse } from "./yaid-ts/yaid.js";
-
-			function updateInfo(y) {
-				time.innerText = y.time().toUTCString();
-				meta.innerText = y.meta();
-				bytes.innerText = y.bytes;
-			}
-
-			window.generate = function () {
-				const y = New();
-				updateInfo(y);
-				yaid.value = y;
-			};
-
-			window.update = function () {
-				try {
-					const y = Parse(yaid.value);
-					updateInfo(y);
-				} catch (err) {
-					//
-				}
-			};
-
-			generate();
-		</script>
 	</body>
 </html>
