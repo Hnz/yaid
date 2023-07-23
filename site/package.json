@@ -1,0 +1,18 @@
+{
+	"name": "yaid-site",
+	"version": "0.0.0",
+	"description": "YAID website",
+	"private": true,
+	"license": "MIT",
+	"author": "Hans van Leeuwen",
+	"type": "module",
+	"scripts": {
+		"start": "bun run build.js"
+	},
+	"dependencies": {
+		"@picocss/pico": "^1.5.10",
+		"bun": "^0.6.12",
+		"handlebars": "^4.7.7",
+		"remarkable": "^2.0.1"
+	}
+}

@@ -1,0 +1,61 @@
+<html lang="en" data-theme="light">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{{title}}</title>
+		<link rel="stylesheet" href="style.css" />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🆔</text></svg>"
+		/>
+		<script type="module" src="script.js"></script>
+	</head>
+	<body>
+		<nav class="container-fluid">
+			<ul>
+				<li>
+					<a href="./" class="contrast">
+						<b>🆔 YAID</b>
+					</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<details role="list">
+						<summary aria-haspopup="listbox" role="link" class="secondary">
+							Libraries
+						</summary>
+						<ul role="listbox">
+							<li><a href="ts">Typescript</a></li>
+							<li><a href="python">Python</a></li>
+							<li><a href="go">Go</a></li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</nav>
+
+		<div class="container">
+			<div class="grid">
+				<article>
+					<header>YAID</header>
+					<input id="yaid" type="text" minlength="8" oninput="update()" />
+					<button onclick="generate()">Generate</button>
+					<mark id="errorBox"></mark>
+				</article>
+				<article>
+					<header>Info</header>
+					<b>Time:</b>
+					<span id="time"></span><br />
+					<b>Meta:</b>
+					<span id="meta"></span><br />
+					<b>Bytes:</b>
+					[<span id="bytes"></span>]<br />
+				</article>
+			</div>
+
+			{{{html}}}
+
+		</div>
+	</body>
+</html>
