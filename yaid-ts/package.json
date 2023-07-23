@@ -7,9 +7,9 @@
 	"author": "Hans van Leeuwen",
 	"bin": "cmd.js",
 	"type": "module",
-	"main": "yaid",
+	"main": "dist/yaid.js",
 	"scripts": {
-		"build": "bun build yaid.ts --outdir . --sourcemap external",
+		"build": "tsc yaid.ts --declaration --emitDeclarationOnly --outDir dist && bun build yaid.ts --outdir dist --sourcemap external",
 		"docs": "typedoc --plugin typedoc-plugin-markdown --out docs yaid.ts",
 		"lint": "eslint *.ts cmd.js",
 		"test": "bun test"
@@ -21,16 +21,16 @@
 		"bun": "^0.6.12",
 		"eslint": "^8.43.0",
 		"typedoc": "^0.24.8",
-		"typedoc-plugin-markdown": "^3.15.3"
+		"typedoc-plugin-markdown": "^3.15.3",
+		"typescript": "5.0"
 	},
 	"engines": {
+		"bun": ">=0.6",
 		"node": ">=20"
 	},
 	"files": [
-		"cmd.js",
-		"crockford.ts",
-		"yaid.js",
-		"yaid.js.map",
-		"yaid.ts"
+		"dist/yaid.js",
+		"dist/yaid.js.map",
+		"dist/yaid.d.ts"
 	]
 }
