@@ -12,26 +12,33 @@ function showError(err) {
 }
 
 function updateInfo(y) {
-	time.innerText = y.time().toUTCString();
-	meta.innerText = y.meta();
-	bytes.innerText = y.bytes;
+	date.valueAsDate = y.time();
+	meta.value = y.meta();
+	bytes.value = "[" + y.bytes + "]";
 	showError();
 }
 
 window.update = function () {
-	console.log("UPDATE");
 	try {
-		const y = Parse(yaid.value);
+		y = Parse(yaid.value);
 		updateInfo(y);
 	} catch (err) {
 		showError(err);
 	}
 };
 
+window.updateId = function () {
+	y.setMeta(meta.value);
+	y.setTime(date.valueAsDate);
+	yaid.value = y;
+	bytes.value = "[" + y.bytes + "]";
+};
+
 window.generate = function () {
-	const y = New();
+	y = New();
 	yaid.value = y;
 	updateInfo(y);
 };
 
+window.y = New();
 generate();

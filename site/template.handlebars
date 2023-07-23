@@ -11,31 +11,33 @@
 		<script type="module" src="script.js"></script>
 	</head>
 	<body>
-		<nav class="container-fluid">
-			<ul>
-				<li>
-					<a href="./" class="contrast">
-						<b>🆔 YAID</b>
-					</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<details role="list">
-						<summary aria-haspopup="listbox" role="link" class="secondary">
-							Libraries
-						</summary>
-						<ul role="listbox">
-							<li><a href="ts">Typescript</a></li>
-							<li><a href="python">Python</a></li>
-							<li><a href="go">Go</a></li>
-						</ul>
-					</details>
-				</li>
-			</ul>
-		</nav>
-
 		<div class="container">
+			<nav class="container-fluid">
+				<ul>
+					<li>
+						<a href="./" class="contrast">
+							<b>🆔 YAID</b>
+						</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<details role="list">
+							<summary aria-haspopup="listbox" role="link" class="secondary">
+								Libraries
+							</summary>
+							<ul role="listbox">
+								<li><a
+										href="https://github.com/hnz/yaid/yaid-ts"
+									>Typescript</a></li>
+								<li><a href="https://github.com/hnz/yaid/yaid-py">Python</a></li>
+								<li><a href="https://github.com/hnz/yaid/yaid-go">Go</a></li>
+							</ul>
+						</details>
+					</li>
+				</ul>
+			</nav>
+
 			<div class="grid">
 				<article>
 					<header>YAID</header>
@@ -43,16 +45,121 @@
 					<button onclick="generate()">Generate</button>
 					<mark id="errorBox"></mark>
 				</article>
+
 				<article>
 					<header>Info</header>
-					<b>Time:</b>
-					<span id="time"></span><br />
-					<b>Meta:</b>
-					<span id="meta"></span><br />
-					<b>Bytes:</b>
-					[<span id="bytes"></span>]<br />
+
+					<label>
+						Date
+						<input type="datetime-local" id="date" onchange="updateId()" />
+					</label>
+					<label>
+						Meta
+						<input type="number" id="meta" min="0" max="255" onchange="updateId()" />
+					</label>
+
+					<label>
+						Bytes
+						<input id="bytes" type="text" readonly />
+					</label>
 				</article>
 			</div>
+			<!--
+			<article>
+				<header>Bytes</header>
+
+				<table>
+					<thead>
+						<tr>
+							<th>1</th>
+							<th>2</th>
+							<th>3</th>
+							<th>4</th>
+							<th>5</th>
+							<th>6</th>
+							<th>7</th>
+							<th>8</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input
+									type="number"
+									id="byte1"
+									min="0"
+									max="255"
+									onchange="updateId()"
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									id="byte2"
+									min="0"
+									max="255"
+									onchange="updateId()"
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									id="byte3"
+									min="0"
+									max="255"
+									onchange="updateId()"
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									id="byte4"
+									min="0"
+									max="255"
+									onchange="updateId()"
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									id="byte5"
+									min="0"
+									max="255"
+									onchange="updateId()"
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									id="byte6"
+									min="0"
+									max="255"
+									onchange="updateId()"
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									id="byte7"
+									min="0"
+									max="255"
+									onchange="updateId()"
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									id="byte8"
+									min="0"
+									max="255"
+									onchange="updateId()"
+								/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+-->
 
 			{{{html}}}
 
