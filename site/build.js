@@ -12,7 +12,7 @@ async function main() {
 	await copyFile("assets/logo-js.svg", "dist/logo-js.svg");
 	await copyFile("assets/logo-py.svg", "dist/logo-py.svg");
 	await copyFile("assets/logo-go.svg", "dist/logo-go.svg");
-	await copyFile("script.js", "dist/script.js");
+	//await copyFile("script.js", "dist/script.js");
 	await copyFile("node_modules/@picocss/pico/css/pico.min.css", "dist/style.css");
 
 	return buildIndex();

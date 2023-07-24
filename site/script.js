@@ -1,4 +1,4 @@
-import { New, Parse } from "../../yaid-ts/yaid.js";
+import { New, Parse } from "../yaid-ts/yaid.ts";
 
 function showError(err) {
 	if (err) {
