@@ -28,7 +28,7 @@ async function buildIndex() {
 	const html = md.render(buf.toString());
 
 	// Write html
-	const data = template({ title: "FII", html });
+	const data = template({ title: "YAID", html });
 	return writeFile("dist/index.html", data);
 }
 

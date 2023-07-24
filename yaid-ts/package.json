@@ -9,7 +9,7 @@
 	"type": "module",
 	"main": "dist/yaid.js",
 	"scripts": {
-		"build": "tsc yaid.ts --declaration --emitDeclarationOnly --outDir dist && bun build yaid.ts --outdir dist --sourcemap external",
+		"build": "tsc yaid.ts --declaration --emitDeclarationOnly --outDir dist && bun build yaid.ts --outdir dist --sourcemap external --minify",
 		"docs": "typedoc --plugin typedoc-plugin-markdown --out docs yaid.ts",
 		"lint": "eslint *.ts cmd.js",
 		"test": "bun test"
@@ -26,7 +26,7 @@
 		"typescript": "5.0"
 	},
 	"engines": {
-		"bun": ">=0.6",
+		"bun": ">=0.6.12",
 		"node": ">=20"
 	},
 	"files": [

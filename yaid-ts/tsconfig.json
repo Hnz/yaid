@@ -5,7 +5,8 @@
 		"types": ["bun-types"],
 
 		// enable latest features
-		"lib": ["DOM", "es2023"],
+		"lib": ["DOM", "ES2022"],
+		"module": "ES2022",
 
 		// if TS 5.x+
 		"moduleResolution": "bundler",

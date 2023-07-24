@@ -12,7 +12,8 @@ function showError(err) {
 }
 
 function updateInfo(y) {
-	date.valueAsDate = y.time();
+	// Strip the last character to correctly format the date
+	date.value = y.time().toISOString().slice(0, -1);
 	meta.value = y.meta();
 	bytes.value = "[" + y.bytes + "]";
 	showError();
@@ -29,7 +30,7 @@ window.update = function () {
 
 window.updateId = function () {
 	y.setMeta(meta.value);
-	y.setTime(date.valueAsDate);
+	y.setTime(new Date(date.value));
 	yaid.value = y;
 	bytes.value = "[" + y.bytes + "]";
 };
