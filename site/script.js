@@ -1,5 +1,7 @@
 import { New, Parse } from "../yaid-ts/yaid.ts";
 
+let y = New();
+
 function showError(err) {
 	if (err) {
 		yaid.setAttribute("aria-invalid", "true");
@@ -41,5 +43,4 @@ window.generate = function () {
 	updateInfo(y);
 };
 
-window.y = New();
 generate();

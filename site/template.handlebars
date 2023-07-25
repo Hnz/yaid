@@ -49,19 +49,23 @@
 
 				<article>
 					<header>Info</header>
-
 					<label>
-						Date
-						<input type="datetime-local" id="date" onchange="updateId()" />
+						UTC Date
+						<input
+							type="datetime-local"
+							id="date"
+							min="1970-01-01T00:00:00.000"
+							max="2318-06-04T06:57:57.750"
+							onchange="updateId()"
+						/>
 					</label>
 					<label>
 						Meta
 						<input type="number" id="meta" min="0" max="255" onchange="updateId()" />
 					</label>
-
 					<label>
 						Bytes
-						<input id="bytes" type="text" readonly />
+						<input type="text" id="bytes" readonly />
 					</label>
 				</article>
 			</div>

@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-import { New, Parse } from "./yaid.js";
+import { New, Parse } from "./dist/yaid.js";
 
 const help = `usage: yaid [-h] | [-i INFO] | [-m META]
 
@@ -13,12 +13,12 @@ options:
 
 if (process.argv.includes("-h") || process.argv.includes("--help")) {
 	console.log(help);
-} else if (process.argv.includes("-i")) {
+} else if (process.argv.includes("-i") || process.argv.includes("--info")) {
 	const id = process.argv[3];
 	const y = Parse(id);
 	console.log("Time:", y.time());
 	console.log("Meta:", y.meta());
-} else if (process.argv.includes("-m")) {
+} else if (process.argv.includes("-m") || process.argv.includes("--meta")) {
 	const meta = process.argv[3];
 	const s = New(meta).toString();
 	console.log(s);
