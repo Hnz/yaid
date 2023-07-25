@@ -15,11 +15,10 @@
 		"test": "bun test"
 	},
 	"devDependencies": {
-		"@tsconfig/node20": "^1.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.60.0",
 		"@typescript-eslint/parser": "^5.60.0",
 		"bun": "^0.6.12",
-		"bun-types": "^0.7.0",
+		"bun-types": "^0.6",
 		"eslint": "^8.43.0",
 		"typedoc": "^0.24.8",
 		"typedoc-plugin-markdown": "^3.15.3",
