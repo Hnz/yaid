@@ -55,13 +55,12 @@ export class YAID {
 
 	/** Time as hundredth of a second since January 1, 1970 12:00:00 AM UTC */
 	timestamp(): number {
-		return (
-			this.bytes[4] |
-			(this.bytes[3] << 8) |
-			(this.bytes[2] << 16) |
-			(this.bytes[1] << 24) |
-			(this.bytes[0] << 32)
-		);
+		let number = 0;
+		for (let i = 0; i < 5; i++) {
+			number += this.bytes[i] * Math.pow(2, 8 * (4 - i));
+		}
+
+		return number;
 	}
 
 	/** Set the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC */
