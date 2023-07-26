@@ -13,6 +13,10 @@
 		"@picocss/pico": "^1.5.10",
 		"bun": "^0.6.12",
 		"handlebars": "^4.7.7",
+		"jsdoc-to-markdown": "^8.0.0",
 		"remarkable": "^2.0.1"
+	},
+	"devDependencies": {
+		"typedoc": "^0.24.8"
 	}
 }

@@ -11,6 +11,7 @@ async function main() {
 		await mkdir("dist");
 	} catch {}
 
+	await copyFile("darkmode.js", "dist/darkmode.js");
 	await copyFile("assets/logo-js.svg", "dist/logo-js.svg");
 	await copyFile("assets/logo-py.svg", "dist/logo-py.svg");
 	await copyFile("assets/logo-go.svg", "dist/logo-go.svg");
@@ -19,7 +20,7 @@ async function main() {
 	await copyFile("node_modules/@picocss/pico/css/pico.min.css.map", "dist/pico.min.css.map");
 
 	await buildIndex();
-	await buildJs();
+	//await buildJs();
 
 	return;
 }

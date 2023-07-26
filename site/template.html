@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" data-theme="auto">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,9 +8,9 @@
 			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🆔</text></svg>"
 		/>
 		<link rel="stylesheet" href="pico.min.css" />
-		<script type="module" src="script.js"></script>
+		<script type="module" src="darkmode.js"></script>
 	</head>
-	<body data-theme="dark">
+	<body>
 		<div class="container">
 			<nav class="container-fluid">
 				<ul>
@@ -40,6 +40,15 @@
 			</nav>
 
 			{{main}}
+
+			<footer>
+				<hr />
+				<small><i>© 2023 Hans van Leeuwen</i></small>
+				<div style="float: right">
+					🌞 <input type="checkbox" role="switch" id="toggleSwitch" /> 🌚
+				</div>
+				<br /><br />
+			</footer>
 		</div>
 	</body>
 </html>
