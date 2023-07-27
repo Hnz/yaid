@@ -14,11 +14,6 @@ You can run it from the command line
     $ yaid
     4X85VYWZC9ABP
 
-or as a module
-
-    $ python3 -m yaid
-    4X85VYWZC9ABP
-
 Set metadata
 
     $ yaid -m 123
