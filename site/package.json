@@ -7,15 +7,11 @@
 	"author": "Hans van Leeuwen",
 	"type": "module",
 	"scripts": {
-		"build": "bash build.sh"
+		"build": "bun build --minify --sourcemap=external --outdir=dist script.js && bun run build.js"
 	},
 	"dependencies": {
 		"@picocss/pico": "^1.5.10",
 		"bun": "^0.6.12",
-		"handlebars": "^4.7.7",
-		"jsdoc-to-markdown": "^8.0.0",
-		"remarkable": "^2.0.1",
-		"typedoc": "^0.24.8",
-		"typedoc-plugin-markdown": "^3.15.3"
+		"markdown-it-highlightjs": "^4.0.1"
 	}
 }

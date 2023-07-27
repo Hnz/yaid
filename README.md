@@ -2,6 +2,14 @@
 
 _Yet Another ID_
 
+## Usage
+
+```js
+import { New, Parse } from "yaid";
+
+const id = New();
+```
+
 ### Features
 
 🔸 Only 8 bytes long </br>

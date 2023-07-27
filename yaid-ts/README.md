@@ -6,6 +6,14 @@ _Javascript implementation of Yet Another ID_
 
     npm install yaid
 
+## Usage
+
+```js
+import { New, Parse } from "yaid";
+
+const id = New();
+```
+
 ## Command line
 
 This package comes with a commandline utility called `yaid`.
@@ -29,15 +37,15 @@ Show info
 
 This package uses [bun].
 
-### Build
+#### Build
 
     npm run build
 
-### Lint
+#### Lint
 
     npm run lint
 
-### Test
+#### Test
 
     npm run test
 
