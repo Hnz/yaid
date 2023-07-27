@@ -2,6 +2,7 @@
 
 bun build script.js --outdir dist --minify
 
+cp darkmode.js assets/* node_modules/@picocss/pico/css/pico.min.css* dist
 cp template.html dist/index.html
 perl -p -i.bak -e 's/{{title}}/THE TITLE/' dist/index.html
 
