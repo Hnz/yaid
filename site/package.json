@@ -7,7 +7,7 @@
 	"author": "Hans van Leeuwen",
 	"type": "module",
 	"scripts": {
-		"build": "bun build script.js --outdir dist && node build.js"
+		"build": "bash build.sh"
 	},
 	"dependencies": {
 		"@picocss/pico": "^1.5.10",

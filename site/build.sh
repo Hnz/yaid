@@ -1,8 +1,14 @@
 #!/bin/bash
 
+bun build script.js --outdir dist --minify
+
 cp template.html dist/index.html
 perl -p -i.bak -e 's/{{title}}/THE TITLE/' dist/index.html
-app=`cat app.html && node_modules/.bin/remarkable ../README.md` perl -p -i.bak -e 's/{{main}}/$ENV{app}/' dist/index.html
 
-cd ../yaid-py
-py=`pydoc-markdown -p yaid`
+app=`cat app.html && npx remarkable ../README.md` \
+perl -p -i.bak -e 's/{{main}}/$ENV{app}/' dist/index.html
+
+cp template.html dist/yaid-py.html
+md=`cd ../yaid-py && cat README.md && pydoc-markdown -p yaid`
+py=`echo "$md" | npx remarkable` \
+perl -p -i.bak -e 's/{{main}}/$ENV{py}/' dist/yaid-py.html
