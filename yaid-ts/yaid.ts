@@ -68,6 +68,9 @@ export class YAID {
 		if (t > MAX_TIMESTAMP) {
 			throw new Error("timestamp must not be greater than " + MAX_TIMESTAMP);
 		}
+		for (let i = 0, j = 1; i < TIME_BYTES; i++, j *= 0x100) {
+			this.bytes[TIME_BYTES - 1 - i] = (t / j) & 0xff;
+		}
 		/*
 		this.bytes[0] = t >> 32;
 		this.bytes[1] = (t >> 24) & 255;
@@ -75,9 +78,6 @@ export class YAID {
 		this.bytes[3] = (t >> 8) & 255;
 		this.bytes[4] = t & 255;
 		*/
-		for (let i = 0, j = 1; i < TIME_BYTES; i++, j *= 0x100) {
-			this.bytes[TIME_BYTES - 1 - i] = (t / j) & 0xff;
-		}
 	}
 
 	toBytes(): Uint8Array {
@@ -92,11 +92,10 @@ export class YAID {
 /**
  * New YAID
  * @param meta
- * @param size Size of the id in bytes
  * @param time
  * @returns YAID
  */
-export function New(meta?: number, size = 8, time = new Date()): YAID {
+export function New(meta?: number, time = new Date()): YAID {
 	if (typeof meta === "undefined") {
 		meta = random(META_BYTES)[0];
 	}

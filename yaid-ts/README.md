@@ -4,7 +4,9 @@ _Javascript implementation of Yet Another ID_
 
 ## Install
 
-    npm install yaid
+```shell
+$ npm install yaid
+```
 
 ## Usage
 
