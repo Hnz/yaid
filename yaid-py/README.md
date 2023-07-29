@@ -8,12 +8,6 @@ _Python implementation of Yet Another ID_
 $ pip3 install yaid
 ```
 
-## Test
-
-```shell
-$ python3 -m unittest
-```
-
 ## Usage
 
 ```python
@@ -56,6 +50,12 @@ Show info
 $ yaid -i 4X85W9A0Y9TQP
 Time: 2023-07-05 01:31:57.440000
 Meta: 123
+```
+
+## Test
+
+```shell
+$ python3 -m unittest
 ```
 
 ## Building the documentation

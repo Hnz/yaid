@@ -7,7 +7,7 @@
 	"author": "Hans van Leeuwen",
 	"type": "module",
 	"scripts": {
-		"build": "bun build --minify --sourcemap=external --outdir=dist script.js && bun run build.js && sass style.scss dist/style.css"
+		"build": "bun build --minify --sourcemap=external --outdir=dist script.js && bun run build.js"
 	},
 	"dependencies": {
 		"@picocss/pico": "^1.5.10",

@@ -43,24 +43,22 @@ Meta: 123
 
 ## Develop
 
-This package uses [bun].
+This package uses [bun](https://bun.sh).
 
-#### Build
+Build
 
 ```shell
 npm run build
 ```
 
-#### Lint
+Lint
 
 ```shell
 npm run lint
 ```
 
-#### Test
+Test
 
 ```shell
  npm run test
 ```
-
-[bun]: bun.sh

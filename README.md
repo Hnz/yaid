@@ -7,7 +7,8 @@ _Yet Another ID_
 🔸 Only 8 bytes long </br>
 🔸 Includes a centisecond timestamp </br>
 🔸 Integrated `int8` shard id </br>
-🔸 Rendered as 13 character [Base32] strings
+🔸 Rendered as 13 character [Base32] strings </br>
+🔸 SDKs for [python](yaid-py), [javascript](yaid-ts) and [go](yaid-go)
 
 ### Comparison
 
@@ -40,7 +41,7 @@ A random value or a counter could for example be used.
 
 #### Meta
 
-8 bit value that information about the id. A database shard id for example.
+8 bit value that contains information about the id itself. A database shard number for example.
 
 [Base32]: https://www.crockford.com/base32.html
 [yaid]: https://pkg.go.dev/github.com/hnz/yaid#section-readme
