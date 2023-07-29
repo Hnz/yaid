@@ -6,23 +6,11 @@ yaid is a go package that implements [YAID]
 # Example
 
 	import (
-		"github.com/hnz/yaid"
+		"github.com/hnz/yaid/yaid-go"
 	)
 
 	y := yaid.NewGenerator()
 	id := y()
-
-# Benchmark vs other implementations
-
-	goos: windows
-	goarch: amd64
-	pkg: github.com/hnz/yaid
-	cpu: AMD Ryzen 7 3700X 8-Core Processor
-	BenchmarkYAID-16             	 5198966	       231.2 ns/op	      76 B/op	       4 allocs/op
-	BenchmarkYAIDGenerator-16    	 7151988	       168.3 ns/op	      26 B/op	       2 allocs/op
-	BenchmarkUUIDv1-16           	38715171	        30.42 ns/op	       0 B/op	       0 allocs/op
-	BenchmarkUUIDv4-16           	 6573123	       180.4 ns/op	      40 B/op	       2 allocs/op
-	BenchmarkULID-16             	 6184029	       193.5 ns/op	      40 B/op	       2 allocs/op
 
 [YAID]: https://github.com/hnz/yaid
 */
@@ -39,7 +27,7 @@ import (
 )
 
 // Get the maximum timestamp by setting all bytes to maximum value
-var max_timestamp = YAID{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}.timestamp()
+var max_timestamp = YAID{255, 255, 255, 255, 255, 255, 255, 255}.timestamp()
 
 const (
 	TIME_BYTES = 5

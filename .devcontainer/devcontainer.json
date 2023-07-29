@@ -15,7 +15,7 @@
 	//"forwardPorts": [6060],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "sudo apt update && sudo apt install -y python3-build python3-setuptools python3-venv && curl -fsSL https://deno.land/x/install/install.sh | sh"
+	"postCreateCommand": "npm i -g bun && sudo apt update && sudo apt install -y python3-setuptools python3-venv"
 
 	// Start a godoc server on 6060
 	//"postStartCommand": "go run golang.org/x/tools/cmd/godoc@latest"

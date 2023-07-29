@@ -84,6 +84,14 @@ export class YAID {
 		return this.bytes;
 	}
 
+	toNumber(): number {
+		let value = 0;
+		for (let i = this.bytes.length - 1; i >= 0; i--) {
+			value = value * 256 + this.bytes[i];
+		}
+		return value;
+	}
+
 	toString(): string {
 		return base32Encode(this.bytes);
 	}

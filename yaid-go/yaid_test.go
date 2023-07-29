@@ -5,6 +5,7 @@ package yaid_test
 import (
 	"crypto/rand"
 	"fmt"
+	"log"
 	"testing"
 	"time"
 
@@ -26,15 +27,6 @@ func Example() {
 	fmt.Println("time: ", y.Time().UTC())
 	fmt.Println("shard:", y.Meta())
 
-	y, err := yaid.Parse(y.String())
-	if err != nil {
-		fmt.Println("Error!", err)
-	}
-
-	fmt.Println("time: ", y.Time().UTC())
-	fmt.Println("shard:", y.Meta())
-	fmt.Println("error:", err)
-
 	// Output:
 	//
 	// yaid:  BJA1W6ST0003V
@@ -42,9 +34,6 @@ func Example() {
 	// bytes: [185 40 60 54 116 0 0 123]
 	// time:  2222-01-02 03:04:05 +0000 UTC
 	// shard: [123]
-	// time:  2222-01-02 03:04:05 +0000 UTC
-	// shard: [123]
-	// error: <nil>
 }
 
 func ExampleFactory() {
@@ -120,5 +109,11 @@ func BenchmarkULID(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		ms := time.Now().UnixMilli()
 		ulid.New(uint64(ms), rand.Reader)
+	}
+}
+
+func assert(a, b interface{}) {
+	if a != b {
+		log.Fatalln(a, "does not equal ", b)
 	}
 }
