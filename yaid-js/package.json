@@ -2,7 +2,7 @@
 	"name": "yaid",
 	"version": "0.1.0",
 	"description": "Yet Anther ID",
-	"homepage": "github.com/hnz/yaid/yaid-ts",
+	"homepage": "github.com/hnz/yaid/yaid-js",
 	"license": "MIT",
 	"author": "Hans van Leeuwen",
 	"bin": "cmd.js",

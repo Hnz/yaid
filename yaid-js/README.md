@@ -19,7 +19,6 @@ const id = New();
 ## Command line
 
 This package comes with a commandline utility called `yaid`.
-You can run it from the command line
 
 ```shell
 $ yaid

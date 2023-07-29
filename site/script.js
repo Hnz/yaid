@@ -1,4 +1,4 @@
-import { New, Parse } from "../yaid-ts/yaid.ts";
+import { New, Parse } from "../yaid-js/yaid.ts";
 
 let y = New();
 

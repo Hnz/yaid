@@ -8,7 +8,7 @@ _Yet Another ID_
 🔸 Includes a centisecond timestamp </br>
 🔸 Integrated `int8` shard id </br>
 🔸 Rendered as 13 character [Base32] strings </br>
-🔸 SDKs for [python](yaid-py), [javascript](yaid-ts) and [go](yaid-go)
+🔸 SDKs for [python](yaid-py), [javascript](yaid-js) and [go](yaid-go)
 
 ### Comparison
 
