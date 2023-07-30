@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Yet Another ID" />
+		<title>YAID</title>
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🆔</text></svg>"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<script type="module" src="darkmode.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="container-fluid">
+				<ul>
+					<li>
+						<a href="./" class="contrast">
+							<b>🆔 YAID</b>
+						</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<a href="yaid-js.html" title="Go SDK">
+							<img alt="Javscript SDK" src="logo-js.svg" width="30" height="30" />
+						</a>
+					</li>
+					<li>
+						<a href="yaid-py.html" title="Go SDK">
+							<img alt="Python SDK" src="logo-py.svg" width="30" height="30" />
+						</a>
+					</li>
+					<li>
+						<a href="yaid-go.html" title="Go SDK">
+							<img alt="Go SDK" src="logo-go.svg" width="30" height="30" />
+						</a>
+					</li>
+				</ul>
+			</nav>
+			
+<div class="grid">
+	<article>
+		<header>YAID</header>
+		<label>ID<input id="yaid" type="text" minlength="8" oninput="update()" /></label>
+		<button onclick="generate()">Generate</button>
+		<br /><mark id="errorBox"></mark>
+	</article>
+
+	<article>
+		<header>Info</header>
+		<label>
+			UTC Date
+			<input
+				type="datetime-local"
+				id="date"
+				min="1970-01-01T00:00:00.000"
+				max="2318-06-04T06:57:57.750"
+				onchange="updateId()"
+			/>
+		</label>
+		<label>
+			Meta
+			<input type="number" id="meta" min="0" max="255" onchange="updateId()" />
+		</label>
+		<label>
+			Bytes
+			<input type="text" id="bytes" readonly />
+		</label>
+	</article>
+</div>
+<script type="module" src="script.js"></script>
+<h1>🆔 YAID</h1>
+<p><em>Yet Another ID</em></p>
+<h3>Features</h3>
+<p>🔸 Only 8 bytes long </br>
+🔸 Includes a centisecond timestamp </br>
+🔸 Integrated <code>int8</code> shard id </br>
+🔸 Rendered as 13 character <a href="https://www.crockford.com/base32.html">Base32</a> strings </br>
+🔸 SDKs for <a href="yaid-py">python</a>, <a href="yaid-js">javascript</a> and <a href="yaid-go">go</a></p>
+<h3>Comparison</h3>
+<p>A mix of <a href="https://github.com/ulid/spec">ULID</a> and <a href="https://www.ietf.org/archive/id/draft-peabody-dispatch-new-uuid-format-01.html#name-uuidv7-layout-and-bit-order">UUIDv7</a>.</p>
+<h2>Specifications</h2>
+<p>Version 0.1</p>
+<h4>Layout</h4>
+<table>
+<thead>
+<tr>
+<th>Bits</th>
+<th>Bytes</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 39</td>
+<td>5</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>40 - 55</td>
+<td>2</td>
+<td>Differentiator</td>
+</tr>
+<tr>
+<td>56 - 63</td>
+<td>1</td>
+<td>Meta</td>
+</tr>
+</tbody>
+</table>
+<h4>Timestamp</h4>
+<p>Big-endian 40 bit integer.
+Represents the time passed since <code>January 1, 1970 12:00:00 AM UTC</code> in
+hundredths of a second.</p>
+<p>The timestamp will roll over on <code>June 4, 2318 6:57:57.760 AM UTC</code>.</p>
+<h4>Differentiator</h4>
+<p>16 bits that are used to make the id unique within a given timestamp.
+A random value or a counter could for example be used.</p>
+<h4>Meta</h4>
+<p>8 bit value that contains information about the id itself. A database shard number for example.</p>
+
+			<footer>
+				<br /><br />
+				<hr />
+				<small><i>© 2023 Hans van Leeuwen 89eba14
+</i></small>
+				<div style="float: right">
+					🌞 <input type="checkbox" role="switch" id="toggleSwitch" /> 🌚
+				</div>
+				<br /><br />
+			</footer>
+		</div>
+	</body>
+</html>
