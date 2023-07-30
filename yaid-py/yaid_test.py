@@ -5,7 +5,7 @@ import yaid
 
 
 def load_tests(loader, tests, ignore):
-    """Run documentation tests"""
+    """Run documentation  tests"""
     tests.addTests(doctest.DocTestSuite(yaid))
     return tests
 
@@ -13,7 +13,8 @@ def load_tests(loader, tests, ignore):
 class TestYAID(unittest.TestCase):
     def test_parse(self):
         y = yaid.parse("4X7BMTC6T6XEW")
-        self.assertEqual(y.bytes, bytearray([39, 78, 186, 105, 134, 209, 186, 238]))
+        self.assertEqual(y.bytes, bytearray(
+            [39, 78, 186, 105, 134, 209, 186, 238]))
 
     def test_meta(self):
         y = yaid.YAID()
@@ -49,7 +50,8 @@ class TestYAID(unittest.TestCase):
         self.assertEqual(y.timestamp(), 32769)
 
         y.set_timestamp(yaid.MAX_TIMESTAMP)
-        self.assertEqual(y.bytes, bytearray([255, 255, 255, 255, 255, 0, 0, 0]))
+        self.assertEqual(y.bytes, bytearray(
+            [255, 255, 255, 255, 255, 0, 0, 0]))
         self.assertEqual(y.timestamp(), yaid.MAX_TIMESTAMP)
 
 

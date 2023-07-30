@@ -9,7 +9,7 @@ Yet Another ID
 options:
   -h, --help            show this help message and exit
   -i INFO, --info INFO  print info on the given id
-  -m META, --meta META  number beteen 0-255. Defaults to a random value.`;
+  -m META, --meta META  number between 0-255. Defaults to a random value.`;
 
 if (process.argv.includes("-h") || process.argv.includes("--help")) {
 	console.log(help);
