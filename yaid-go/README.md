@@ -1,7 +1,7 @@
 [![Go.Dev reference](https://img.shields.io/badge/go.dev-reference-blue?logo=go&logoColor=white&style=for-the-badge)](https://pkg.go.dev/github.com/hnz/yaid/yaid-go#section-readme)
-[![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/hnz/yaid/yaid-go?style=for-the-badge)](https://go.dev/doc/devel/release)
+[![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/hnz/yaid?filename=yaid-go%2Fgo.mod&style=for-the-badge)](https://go.dev/doc/devel/release)
 [![Go Report Card](https://goreportcard.com/badge/github.com/hnz/yaid/yaid-go?style=for-the-badge)](https://goreportcard.com/report/github.com/hnz/yaid/yaid-go)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/hnz/yaid/yaid-go/go.yml?label=tests&style=for-the-badge)](https://github.com/hnz/yaid/yaid-go/actions/workflows/go.yml)
+[![License](https://img.shields.io/github/license/hnz/yaid?style=for-the-badge)](https://github.com/hnz/yaid/blob/main/LICENSE)
 
 # 🆔 YAID-go
 
@@ -14,12 +14,17 @@ _Go implementation of Yet Another ID_
 ## Usage
 
 ```go
+package main
+
 import (
-    "github.com/hnz/yaid/yaid-go"
+	"fmt"
+	"github.com/hnz/yaid/yaid-go"
 )
 
-y := yaid.NewGenerator()
-id := y()
+func main() {
+	id, err := yaid.New([]byte{123})
+	fmt.Println(id, err)
+}
 ```
 
 See full api specifications and examples [here](https://pkg.go.dev/github.com/hnz/yaid/yaid-go#section-readme).
