@@ -1,10 +1,12 @@
 import { copyFile, readFile, writeFile, mkdir } from "node:fs/promises";
+import { exec } from "node:child_process";
 import markdownIt from "markdown-it";
 import markdownCopy from "markdown-it-copy";
 import highlightjs from "markdown-it-highlightjs";
 import { compile } from "sass";
 
 const md = markdownIt({ html: true }).use(highlightjs).use(markdownCopy, { btnText: "📋" });
+const gitrev = await run("git rev-parse --short HEAD");
 
 async function main() {
 	try {
@@ -31,7 +33,7 @@ async function main() {
 			"dist/index.html",
 			"YAID",
 			"Yet Another ID",
-			app.toString()
+			app.toString(),
 		),
 
 		// Create yaid-go
@@ -56,7 +58,7 @@ async function handleMarkdown(
 	outfile,
 	title = "",
 	description = "",
-	prefix = ""
+	prefix = "",
 ) {
 	const markdown = await readFile(mdfile);
 	const main = "\n" + prefix + md.render(markdown.toString());
@@ -64,9 +66,24 @@ async function handleMarkdown(
 		.toString()
 		.replace("{{title}}", title)
 		.replace("{{description}}", description)
+		.replace("{{gitrev}}", gitrev)
 		.replace("{{main}}", main);
 
 	return writeFile(outfile, html);
+}
+
+async function run(cmd): Promise<String> {
+	return new Promise((resolve, reject) => {
+		exec(cmd, (error, stdout, stderr) => {
+			if (error) {
+				return reject(error);
+			}
+			if (stderr) {
+				return reject(stderr);
+			}
+			resolve(stdout);
+		});
+	});
 }
 
 main().catch(console.error);

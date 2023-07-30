@@ -7,11 +7,12 @@
 	"author": "Hans van Leeuwen",
 	"bin": "cmd.js",
 	"type": "module",
+	"types": "dist/yaid.d.ts",
 	"main": "dist/yaid.js",
 	"scripts": {
 		"build": "tsc yaid.ts --declaration --emitDeclarationOnly --outDir dist && bun build yaid.ts --outdir dist --sourcemap external",
 		"docs": "typedoc --plugin typedoc-plugin-markdown --out docs yaid.ts",
-		"lint": "eslint *.ts cmd.js",
+		"lint": "eslint *.ts *.js && prettier -c .",
 		"test": "bun test"
 	},
 	"devDependencies": {
@@ -20,6 +21,7 @@
 		"bun": "^0.6.14",
 		"bun-types": "^0.6.14",
 		"eslint": "^8.43.0",
+		"prettier": "^3.0.0",
 		"typedoc": "^0.24.8",
 		"typedoc-plugin-markdown": "^3.15.3",
 		"typescript": "^5.1.6"

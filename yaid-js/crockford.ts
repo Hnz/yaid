@@ -1,40 +1,17 @@
-// Based on www.npmjs.com/package/@ctrl/ts-base32
-// Copyright (c) Scott Cooper <scttcper@gmail.com>
-// Copyright (c) 2016-2017 Linus Unnebäck
-// MIT Licensed
-const RFC4648 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-const RFC4648_HEX = "0123456789ABCDEFGHIJKLMNOPQRSTUV";
-const CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
-
-type Variant = "RFC3548" | "RFC4648" | "RFC4648-HEX" | "Crockford";
+/*
+Copyright (c) 2023 Hans van Leeuwen
+Copyright (c) Scott Cooper <scttcper@gmail.com>
+Copyright (c) 2016-2017 Linus Unnebäck
+MIT Licensed
+Based on www.npmjs.com/package/@ctrl/ts-base32
+*/
+const alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 
 export function base32Encode(
 	buffer: Uint8Array,
-	variant: Variant = "Crockford",
-	options: Partial<{ padding: boolean }> = {}
+	options: Partial<{ padding: boolean }> = {},
 ): string {
-	let alphabet: string;
-	let defaultPadding: boolean;
-
-	switch (variant) {
-		case "RFC3548":
-		case "RFC4648":
-			alphabet = RFC4648;
-			defaultPadding = true;
-			break;
-		case "RFC4648-HEX":
-			alphabet = RFC4648_HEX;
-			defaultPadding = true;
-			break;
-		case "Crockford":
-			alphabet = CROCKFORD;
-			defaultPadding = false;
-			break;
-		default:
-			throw new Error(`Unknown base32 variant: ${variant as string}`);
-	}
-
-	const padding = options.padding ?? defaultPadding;
+	const padding = options.padding;
 	const length = buffer.byteLength;
 	const view = new Uint8Array(buffer);
 
@@ -43,7 +20,7 @@ export function base32Encode(
 	let output = "";
 
 	for (let i = 0; i < length; i++) {
-		value = (value << 8) | view[i]!;
+		value = (value << 8) | view[i];
 		bits += 8;
 
 		while (bits >= 5) {
@@ -75,29 +52,8 @@ function readChar(alphabet: string, char: string): number {
 	return idx;
 }
 
-export function base32Decode(input: string, variant: Variant = "Crockford"): Uint8Array {
-	let alphabet: string;
-	let cleanedInput: string;
-
-	switch (variant) {
-		case "RFC3548":
-		case "RFC4648":
-			alphabet = RFC4648;
-			cleanedInput = input.toUpperCase().replace(/=+$/, "");
-			break;
-		case "RFC4648-HEX":
-			alphabet = RFC4648_HEX;
-			cleanedInput = input.toUpperCase().replace(/=+$/, "");
-			break;
-		case "Crockford":
-			alphabet = CROCKFORD;
-			cleanedInput = input.toUpperCase().replace(/O/g, "0").replace(/[IL]/g, "1");
-			break;
-		default:
-			throw new Error(`Unknown base32 variant: ${variant as string}`);
-	}
-
-	const { length } = cleanedInput;
+export function base32Decode(input: string): Uint8Array {
+	const { length } = input.toUpperCase().replace(/O/g, "0").replace(/[IL]/g, "1");
 
 	let bits = 0;
 	let value = 0;
@@ -106,7 +62,7 @@ export function base32Decode(input: string, variant: Variant = "Crockford"): Uin
 	const output = new Uint8Array(((length * 5) / 8) | 0);
 
 	for (let i = 0; i < length; i++) {
-		value = (value << 5) | readChar(alphabet, cleanedInput[i]!);
+		value = (value << 5) | readChar(alphabet, input[i]);
 		bits += 5;
 
 		if (bits >= 8) {

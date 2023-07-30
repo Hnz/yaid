@@ -24,7 +24,7 @@ MAX_TIMESTAMP: int = 1099511627775
 
 class YAID:
     """
-    Yet Another ID
+    Base class for Yet Another ID
 
         >>> from yaid import YAID
         >>> from datetime import datetime
