@@ -1,0 +1,18 @@
+[project]
+name = "yaid"
+version = "0.0.1"
+authors = [{name = "Hans van Leeuwen"}]
+description = "Yet Another ID"
+license = {text = "MIT License"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = ["krock32"]
+
+[project.scripts]
+yaid = "yaid:main"
+
+[project.urls]
+Homepage = "https://github.com/hnz/yaid/yaid-py"
+Documentation = "https://github.com/hnz/yaid/README.md"
+Repository = "https://github.com/hnz/yaid.git"

@@ -1,0 +1,81 @@
+// Prevent flickering on Fixfox
+html {
+	backface-visibility: hidden;
+}
+
+// Import highlightjs
+@import "node_modules/highlight.js/scss/panda-syntax-light.scss";
+
+[data-theme="dark"] {
+	@import "node_modules/highlight.js/scss/panda-syntax-dark.scss";
+}
+
+// Override default variables
+$primary-500: #876be3;
+$primary-600: #9379e5;
+$primary-700: #9379e5;
+//$primary-500: #673ab7;
+//$primary-600: #5e35b1;
+//$primary-700: #512da8;
+
+// Import Pico
+@import "node_modules/@picocss/pico/scss/pico";
+
+// markdown-it-copy
+pre {
+	position: relative;
+}
+.m-mdic-copy-wrapper {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+}
+.m-mdic-copy-wrapper span.u-mdic-copy-code_lang {
+	position: absolute;
+	top: 3px;
+	right: calc(100% + 4px);
+	font-family: system-ui;
+	font-size: 12px;
+	line-height: 18px;
+	color: #666;
+	opacity: 0.3;
+}
+.m-mdic-copy-wrapper div.u-mdic-copy-notify {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 3px 6px;
+	border: 0;
+	border-radius: 3px;
+	background: none;
+	font-family: system-ui;
+	font-size: 12px;
+	line-height: 18px;
+	color: #666;
+	opacity: 0.3;
+	outline: none;
+	opacity: 1;
+	right: 100%;
+	padding-right: 4px;
+}
+.m-mdic-copy-wrapper button.u-mdic-copy-btn {
+	position: relative;
+	top: 0;
+	right: 0;
+	padding: 3px 6px;
+	border: 0;
+	border-radius: 3px;
+	background: none;
+	font-family: system-ui;
+	font-size: 12px;
+	line-height: 18px;
+	color: #666;
+	opacity: 0.3;
+	outline: none;
+	cursor: pointer;
+	transition: opacity 0.2s;
+}
+.m-mdic-copy-wrapper button.u-mdic-copy-btn:hover {
+	opacity: 1;
+}

@@ -1,0 +1,41 @@
+name: Check pull request
+
+on:
+    push:
+        branches: [master]
+    pull_request_target:
+        branches: [master]
+
+jobs:
+    yaid-go:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-go@v4
+              with:
+                  go-version-file: "go.mod"
+            - name: Test go
+              working-directory: yaid-go
+              run: go test .
+
+    yaid-js:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: oven-sh/setup-bun@v1
+              with:
+                  bun-version: latest
+            - name: Test js
+              working-directory: yaid-js
+              run: bun run test
+
+    yaid-py:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: "3.9"
+            - name: Test python
+              working-directory: yaid-py
+              run: python yaid_test.py

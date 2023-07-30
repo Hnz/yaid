@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="{{description}}" />
+		<title>{{title}}</title>
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🆔</text></svg>"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<script type="module" src="darkmode.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="container-fluid">
+				<ul>
+					<li>
+						<a href="./" class="contrast">
+							<b>🆔 YAID</b>
+						</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<a href="yaid-js.html" title="Go SDK">
+							<img alt="Javscript SDK" src="logo-js.svg" width="30" height="30" />
+						</a>
+					</li>
+					<li>
+						<a href="yaid-py.html" title="Go SDK">
+							<img alt="Python SDK" src="logo-py.svg" width="30" height="30" />
+						</a>
+					</li>
+					<li>
+						<a href="yaid-go.html" title="Go SDK">
+							<img alt="Go SDK" src="logo-go.svg" width="30" height="30" />
+						</a>
+					</li>
+				</ul>
+			</nav>
+			{{main}}
+			<footer>
+				<br /><br />
+				<hr />
+				<small><i>© 2023 Hans van Leeuwen {{gitrev}}</i></small>
+				<div style="float: right">
+					🌞 <input type="checkbox" role="switch" id="toggleSwitch" /> 🌚
+				</div>
+				<br /><br />
+			</footer>
+		</div>
+	</body>
+</html>

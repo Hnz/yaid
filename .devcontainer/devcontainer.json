@@ -1,0 +1,32 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "YAID devcontainer",
+
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/go:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	//"forwardPorts": [6060],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "npm i -g bun && sudo apt update && sudo apt install -y black python3-pip python3-setuptools python3-venv",
+
+	// Start a godoc server on 6060
+	//"postStartCommand": "go run golang.org/x/tools/cmd/godoc@latest"
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": ["esbenp.prettier-vscode", "ms-python.python"]
+		}
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

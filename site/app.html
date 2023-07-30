@@ -1,0 +1,31 @@
+<div class="grid">
+	<article>
+		<header>YAID</header>
+		<label>ID<input id="yaid" type="text" minlength="8" oninput="update()" /></label>
+		<button onclick="generate()">Generate</button>
+		<br /><mark id="errorBox"></mark>
+	</article>
+
+	<article>
+		<header>Info</header>
+		<label>
+			UTC Date
+			<input
+				type="datetime-local"
+				id="date"
+				min="1970-01-01T00:00:00.000"
+				max="2318-06-04T06:57:57.750"
+				onchange="updateId()"
+			/>
+		</label>
+		<label>
+			Meta
+			<input type="number" id="meta" min="0" max="255" onchange="updateId()" />
+		</label>
+		<label>
+			Bytes
+			<input type="text" id="bytes" readonly />
+		</label>
+	</article>
+</div>
+<script type="module" src="script.js"></script>

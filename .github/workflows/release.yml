@@ -1,0 +1,25 @@
+on:
+    release:
+        types: [created]
+
+jobs:
+    releases-go:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                goos: [linux, windows, darwin]
+                goarch: [amd64, arm64]
+        steps:
+            - uses: actions/checkout@v3
+
+            - uses: wangyoucao577/go-release-action@v1
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  goos: ${{ matrix.goos }}
+                  goarch: ${{ matrix.goarch }}
+                  goversion: go.mod
+                  ldflags: -s -w -X main.version=$GITHUB_REF
+                  md5sum: FALSE
+                  sha256sum: TRUE
+                  compress_assets: OFF
+                  executable_compression: upx
