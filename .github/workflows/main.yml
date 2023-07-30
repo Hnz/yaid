@@ -10,6 +10,9 @@ jobs:
 
             - uses: oven-sh/setup-bun@v1
 
+            - name: Install dependecies
+              run: bun install
+
             - name: Build website
               run: bun run build
               working-directory: ./site
