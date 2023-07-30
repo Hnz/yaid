@@ -44,7 +44,7 @@ Show info
 
 ## Test
 
-    python3 -m unittest
+    python3 yaid_test.py
 
 ## Building the documentation
 
