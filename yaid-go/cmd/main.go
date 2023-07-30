@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	meta := flag.Int("m", -1, "Metadata. Number beteen 0-255. Use random value if negative.")
+	meta := flag.Int("m", -1, "Metadata. Number between 0-255. Use random value if negative.")
 	info := flag.String("i", "", "Show id info")
 
 	flag.Parse()
