@@ -1,4 +1,4 @@
-name: Check pull request
+name: Check yaid-js
 
 on:
   pull_request:
