@@ -42,52 +42,62 @@
 			</nav>
 			
 <p><a href="https://pkg.go.dev/github.com/hnz/yaid/yaid-go#section-readme"><img src="https://img.shields.io/badge/go.dev-reference-blue?logo=go&amp;logoColor=white&amp;style=for-the-badge" alt="Go.Dev reference"></a>
-<a href="https://go.dev/doc/devel/release"><img src="https://img.shields.io/github/go-mod/go-version/hnz/yaid/yaid-go?style=for-the-badge" alt="GitHub go.mod Go version"></a>
+<a href="https://go.dev/doc/devel/release"><img src="https://img.shields.io/github/go-mod/go-version/hnz/yaid?filename=yaid-go%2Fgo.mod&amp;style=for-the-badge" alt="GitHub go.mod Go version"></a>
 <a href="https://goreportcard.com/report/github.com/hnz/yaid/yaid-go"><img src="https://goreportcard.com/badge/github.com/hnz/yaid/yaid-go?style=for-the-badge" alt="Go Report Card"></a>
-<a href="https://github.com/hnz/yaid/yaid-go/actions/workflows/go.yml"><img src="https://img.shields.io/github/actions/workflow/status/hnz/yaid/yaid-go/go.yml?label=tests&amp;style=for-the-badge" alt="GitHub Workflow Status"></a></p>
+<a href="https://github.com/hnz/yaid/blob/main/LICENSE"><img src="https://img.shields.io/github/license/hnz/yaid?style=for-the-badge" alt="License"></a></p>
 <h1>🆔 YAID-go</h1>
 <p><em>Go implementation of Yet Another ID</em></p>
 <h2>Install library</h2>
 <pre><code class="hljs">go get github.com/hnz/yaid/yaid-go
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161819-36900">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="go get github.com/hnz/yaid/yaid-go
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161819-36900" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119743-11287">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="go get github.com/hnz/yaid/yaid-go
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119743-11287" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 <h2>Usage</h2>
-<pre><code class="hljs language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/hnz/yaid/yaid-go&quot;</span>
+<pre><code class="hljs language-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">&quot;fmt&quot;</span>
+	<span class="hljs-string">&quot;github.com/hnz/yaid/yaid-go&quot;</span>
 )
 
-y := yaid.NewGenerator()
-id := y()
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161819-51795">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="import (
-    &quot;github.com/hnz/yaid/yaid-go&quot;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	id, err := yaid.New([]<span class="hljs-type">byte</span>{<span class="hljs-number">123</span>})
+	fmt.Println(id, err)
+}
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119744-57582">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="package main
+
+import (
+	&quot;fmt&quot;
+	&quot;github.com/hnz/yaid/yaid-go&quot;
 )
 
-y := yaid.NewGenerator()
-id := y()
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161819-51795" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+func main() {
+	id, err := yaid.New([]byte{123})
+	fmt.Println(id, err)
+}
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119744-57582" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 <p>See full api specifications and examples <a href="https://pkg.go.dev/github.com/hnz/yaid/yaid-go#section-readme">here</a>.</p>
 <h2>Command line</h2>
 <p>This package comes with a commandline utility called <code>yaid</code>.
 You can install it by running <code>go install github.com/hnz/yaid/yaid-go/cmd</code>.</p>
 <pre><code class="hljs">yaid
 4X85VYWZC9ABP
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161825-81796">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="yaid
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119754-18432">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="yaid
 4X85VYWZC9ABP
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161825-81796" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119754-18432" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 <p>Set metadata</p>
 <pre><code class="hljs">yaid -m 123
 4X85W9A0Y9TQP
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161825-40092">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="yaid -m 123
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119754-74102">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="yaid -m 123
 4X85W9A0Y9TQP
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161825-40092" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119754-74102" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 <p>Show info</p>
 <pre><code class="hljs">yaid -i 4X85W9A0Y9TQP
 Time: 2023-07-05 01:31:57.440000
 Meta: 123
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161825-9815">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="yaid -i 4X85W9A0Y9TQP
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119754-60793">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="yaid -i 4X85W9A0Y9TQP
 Time: 2023-07-05 01:31:57.440000
 Meta: 123
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161825-9815" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119754-60793" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 <h1>Benchmark vs other implementations</h1>
 <pre><code class="hljs">goos: windows
 goarch: amd64
@@ -98,7 +108,7 @@ BenchmarkYAIDGenerator-16     7151988       168.3 ns/op      26 B/op	       2 al
 BenchmarkUUIDv1-16           38715171       30.42 ns/op       0 B/op	       0 allocs/op
 BenchmarkUUIDv4-16            6573123       180.4 ns/op      40 B/op	       2 allocs/op
 BenchmarkULID-16              6184029       193.5 ns/op      40 B/op	       2 allocs/op
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161825-34549">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="goos: windows
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119754-54016">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="goos: windows
 goarch: amd64
 pkg: github.com/hnz/yaid
 cpu: AMD Ryzen 7 3700X 8-Core Processor
@@ -107,25 +117,25 @@ BenchmarkYAIDGenerator-16     7151988       168.3 ns/op      26 B/op	       2 al
 BenchmarkUUIDv1-16           38715171       30.42 ns/op       0 B/op	       0 allocs/op
 BenchmarkUUIDv4-16            6573123       180.4 ns/op      40 B/op	       2 allocs/op
 BenchmarkULID-16              6184029       193.5 ns/op      40 B/op	       2 allocs/op
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161825-34549" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119754-54016" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 <h2>Develop</h2>
 <p>Build</p>
 <pre><code class="hljs">go build -o yaid ./cmd
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161825-62000">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="go build -o yaid ./cmd
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161825-62000" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119754-74749">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="go build -o yaid ./cmd
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119754-74749" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 <p>Lint</p>
 <pre><code class="hljs">golint .
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161825-20108">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="golint .
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161825-20108" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119754-69051">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="golint .
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119754-69051" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 <p>Test</p>
 <pre><code class="hljs">go test
-</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690756161825-16944">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="go test
-" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690756161825-16944" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
+</code><div class="m-mdic-copy-wrapper"><div class="u-mdic-copy-notify" id="j-notify-1690764119754-63236">copy success</div><button class="u-mdic-copy-btn j-mdic-copy-btn" data-mdic-content="go test
+" data-mdic-attach-content="" data-mdic-notify-id="j-notify-1690764119754-63236" data-mdic-notify-delay="2000" data-mdic-copy-fail-text="copy fail" onclick="!function(t){const e={copy:(t='',e='')=>new Promise((c,o)=>{const n=document.createElement('textarea'),d=e?`\n\n${e}`:e;n.value=`${t}${d}`,document.body.appendChild(n),n.select();try{const t=document.execCommand('copy');document.body.removeChild(n),t?c():o()}catch(t){document.body.removeChild(n),o()}}),btnClick(t){const c=t&&t.dataset?t.dataset:{},o=c.mdicNotifyId,n=document.getElementById(o),d=c.mdicNotifyDelay,i=c.mdicCopyFailText;e.copy(c.mdicContent,c.mdicAttachContent).then(()=>{n.style.display='block',setTimeout(()=>{n.style.display='none'},d)}).catch(()=>{alert(i)})}};e.btnClick(t)}(this);">📋</button></div></pre>
 
 			<footer>
 				<br /><br />
 				<hr />
-				<small><i>© 2023 Hans van Leeuwen d8c3986
+				<small><i>© 2023 Hans van Leeuwen 3735207
 </i></small>
 				<div style="float: right">
 					🌞 <input type="checkbox" role="switch" id="toggleSwitch" /> 🌚
