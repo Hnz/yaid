@@ -2,6 +2,7 @@
 [![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/hnz/yaid?filename=yaid-go%2Fgo.mod&style=for-the-badge)](https://go.dev/doc/devel/release)
 [![Go Report Card](https://goreportcard.com/badge/github.com/hnz/yaid/yaid-go?style=for-the-badge)](https://goreportcard.com/report/github.com/hnz/yaid/yaid-go)
 [![License](https://img.shields.io/github/license/hnz/yaid?style=for-the-badge)](https://github.com/hnz/yaid/blob/main/LICENSE)
+[![Build status](https://img.shields.io/github/actions/workflow/status/hnz/yaid/check-go.yml?style=for-the-badge)](https://github.com/hnz/yaid/actions/workflows/check-go.yml)
 
 # 🆔 YAID-go
 

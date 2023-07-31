@@ -1,0 +1,29 @@
+name: Check yaid-py
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - yaid-py/**
+
+jobs:
+  yaid-py:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - uses: psf/black@stable
+        with:
+          src: "./yaid-py"
+
+      - name: Install dependecies
+        working-directory: ./yaid-py
+        run: pip3 install krock32
+
+      - name: Test python
+        working-directory: yaid-py
+        run: python yaid_test.py -v

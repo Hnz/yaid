@@ -55,10 +55,10 @@ class YAID:
         self.bytes = bytearray(bytes)
 
     def differentiator(self) -> bytearray:
-        return self.bytes[TIME_BYTES: TIME_BYTES + DIFF_BYTES]
+        return self.bytes[TIME_BYTES : TIME_BYTES + DIFF_BYTES]
 
     def set_differentiator(self, d: bytearray) -> None:
-        self.bytes[TIME_BYTES: TIME_BYTES + DIFF_BYTES] = d
+        self.bytes[TIME_BYTES : TIME_BYTES + DIFF_BYTES] = d
 
     def meta(self) -> int:
         """
@@ -100,8 +100,7 @@ class YAID:
         """
         t = int(t)
         if t > MAX_TIMESTAMP:
-            raise ValueError(
-                f"timestamp must not be greater than {MAX_TIMESTAMP}")
+            raise ValueError(f"timestamp must not be greater than {MAX_TIMESTAMP}")
         for i in range(TIME_BYTES):
             self.bytes[TIME_BYTES - 1 - i] = (t >> (i * 8)) & 0xFF
 
