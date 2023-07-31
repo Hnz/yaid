@@ -25,3 +25,7 @@ jobs:
       - name: Test js
         working-directory: ./yaid-js
         run: bun run test
+
+      - name: Build
+        working-directory: ./yaid-js
+        run: bun run build
