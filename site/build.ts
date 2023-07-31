@@ -3,7 +3,7 @@ import { exec } from "node:child_process";
 import markdownIt from "markdown-it";
 import markdownCopy from "markdown-it-copy";
 import highlightjs from "markdown-it-highlightjs";
-import { compile } from "sass";
+import { compileAsync } from "sass";
 
 const md = markdownIt({ html: true }).use(highlightjs).use(markdownCopy, { btnText: "📋" });
 const gitrev = await run("git rev-parse --short HEAD");
@@ -37,18 +37,36 @@ async function main() {
 		),
 
 		// Create yaid-go
-		handleMarkdown(template, "../yaid-go/README.md", "dist/yaid-go.html", "yaid-go"),
+		handleMarkdown(
+			template,
+			"../yaid-go/README.md",
+			"dist/yaid-go.html",
+			"yaid-go",
+			"Go SDK for YAID",
+		),
 
 		// Create yaid-js
-		handleMarkdown(template, "../yaid-js/README.md", "dist/yaid-js.html", "yaid-js"),
+		handleMarkdown(
+			template,
+			"../yaid-js/README.md",
+			"dist/yaid-js.html",
+			"yaid-js",
+			"Javascript SDK for YAID",
+		),
 
 		// Create yaid-py
-		handleMarkdown(template, "../yaid-py/README.md", "dist/yaid-py.html", "yaid-py"),
+		handleMarkdown(
+			template,
+			"../yaid-py/README.md",
+			"dist/yaid-py.html",
+			"yaid-py",
+			"Python SDK for YAID",
+		),
 	]);
 }
 
 async function compileCSS() {
-	const res = compile("style.scss", { style: "compressed" });
+	const res = await compileAsync("style.scss", { style: "compressed" });
 	return writeFile("dist/style.css", res.css);
 }
 
