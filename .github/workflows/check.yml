@@ -1,55 +1,60 @@
 name: Check pull request
 
 on:
-    push:
-        branches: [main]
-    pull_request_target:
-        branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-    yaid-go:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
+  yaid-go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-            - uses: actions/setup-go@v4
-              with:
-                  go-version-file: "go.mod"
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: "go.mod"
 
-            - name: Test go
-              working-directory: yaid-go
-              run: go test .
+      - uses: Jerome1337/gofmt-action@v1.0.5
+        with:
+          gofmt-path: "./src"
+          gofmt-flags: "-l -d"
 
-    yaid-js:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
+      - name: Test go
+        working-directory: yaid-go
+        run: go test .
 
-            - uses: oven-sh/setup-bun@v1
-              with:
-                  bun-version: latest
+  yaid-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-            - name: Install dependecies
-              working-directory: ./yaid-js
-              run: bun install
+      - uses: oven-sh/setup-bun@v1
 
-            - name: Test js
-              working-directory: ./yaid-js
-              run: bun run test
+      - name: Install dependecies
+        working-directory: ./yaid-js
+        run: bun install
 
-    yaid-py:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
+      - name: Lint
+        working-directory: ./yaid-js
+        run: bun run lint
 
-            - uses: actions/setup-python@v4
-              with:
-                  python-version: "3.9"
+      - name: Test js
+        working-directory: ./yaid-js
+        run: bun run test
 
-            - name: Install dependecies
-              working-directory: ./yaid-py
-              run: pip3 install krock32
+  yaid-py:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-            - name: Test python
-              working-directory: yaid-py
-              run: python yaid_test.py
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependecies
+        working-directory: ./yaid-py
+        run: pip3 install krock32
+
+      - name: Test python
+        working-directory: yaid-py
+        run: python yaid_test.py

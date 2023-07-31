@@ -1,26 +1,26 @@
 name: Generate gh-pages
 
 on:
-    push:
-        branches: [main]
+  push:
+    branches: [main]
 
 jobs:
-    main:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-            - uses: oven-sh/setup-bun@v1
+      - uses: oven-sh/setup-bun@v1
 
-            - name: Install dependecies
-              working-directory: ./site
-              run: bun install
+      - name: Install dependecies
+        working-directory: ./site
+        run: bun install
 
-            - name: Build website
-              run: bun run build
-              working-directory: ./site
+      - name: Build website
+        run: bun run build
+        working-directory: ./site
 
-            - uses: peaceiris/actions-gh-pages@v3
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./site/dist
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site/dist
