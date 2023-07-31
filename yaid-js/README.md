@@ -4,7 +4,7 @@
 
 # 🆔 YAID-js
 
-_Javascript implementation of Yet Another ID_
+_Javascript implementation of [Yet Another ID]_
 
 ## Install
 
@@ -55,3 +55,5 @@ Lint
 Test
 
     npm run test
+
+[Yet Another ID]: https://hnz.github.io/yaid

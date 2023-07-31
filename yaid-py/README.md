@@ -5,7 +5,7 @@
 
 # 🆔 YAID-py
 
-_Python implementation of Yet Another ID_
+_Python implementation of [Yet Another ID]_
 
 ## Install
 
@@ -47,10 +47,18 @@ Show info
     Time: 2023-07-05 01:31:57.440000
     Meta: 123
 
-## Test
+## Development
+
+Install dependecy
+
+    pip3 install krock32
+
+Run unittests
 
     python3 test.py
 
-## Building the documentation
+Building the documentation
 
     pydoc-markdown -p yaid > dist/yaid.md
+
+[Yet Another ID]: https://hnz.github.io/yaid

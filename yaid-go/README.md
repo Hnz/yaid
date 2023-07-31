@@ -6,7 +6,7 @@
 
 # 🆔 YAID-go
 
-_Go implementation of Yet Another ID_
+_Go implementation of [Yet Another ID]_
 
 ## Install library
 
@@ -74,3 +74,5 @@ Lint
 Test
 
     go test
+
+[Yet Another ID]: https://hnz.github.io/yaid
