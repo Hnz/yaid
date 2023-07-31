@@ -16,6 +16,10 @@ jobs:
         with:
           python-version: "3.9"
 
+      - uses: psf/black@stable
+        with:
+          src: "./yaid-py"
+
       - name: Install dependecies
         working-directory: ./yaid-py
         run: pip3 install krock32
