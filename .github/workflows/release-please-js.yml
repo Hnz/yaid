@@ -1,0 +1,21 @@
+name: Release Please yaid-js
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - yaid-js/**
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          package-name: yaid-js
+          monorepo-tags: true

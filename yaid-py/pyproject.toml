@@ -5,7 +5,7 @@ authors = [{name = "Hans van Leeuwen"}]
 description = "Yet Another ID"
 license = {text = "MIT License"}
 classifiers = [
-    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
 ]
 dependencies = ["krock32"]
 
@@ -14,5 +14,4 @@ yaid = "yaid:main"
 
 [project.urls]
 Homepage = "https://github.com/hnz/yaid/yaid-py"
-Documentation = "https://github.com/hnz/yaid/README.md"
 Repository = "https://github.com/hnz/yaid.git"
