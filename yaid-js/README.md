@@ -1,3 +1,6 @@
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/hnz/yaid?filename=yaid-js%2Fpackage.json&style=for-the-badge)](https://github.com/Hnz/yaid/blob/main/yaid-js/package.json)
+[![License](https://img.shields.io/github/license/hnz/yaid?style=for-the-badge)](https://github.com/hnz/yaid/blob/main/LICENSE)
+
 # 🆔 YAID-js
 
 _Javascript implementation of Yet Another ID_
