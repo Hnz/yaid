@@ -1,6 +1,6 @@
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/hnz/yaid?filename=yaid-js%2Fpackage.json&style=for-the-badge)](https://github.com/Hnz/yaid/blob/main/yaid-js/package.json)
-[![License](https://img.shields.io/github/license/hnz/yaid?style=for-the-badge)](https://github.com/hnz/yaid/blob/main/LICENSE)
-[![Build status](https://img.shields.io/github/actions/workflow/status/hnz/yaid/check-js.yml?style=for-the-badge)](https://github.com/hnz/yaid/actions/workflows/check-js.yml)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/hnz/yaid?filename=yaid-js%2Fpackage.json&style=flat-square)](https://github.com/Hnz/yaid/blob/main/yaid-js/package.json)
+[![License](https://img.shields.io/github/license/hnz/yaid?style=flat-square)](https://github.com/hnz/yaid/blob/main/LICENSE)
+[![Build status](https://img.shields.io/github/actions/workflow/status/hnz/yaid/check-js.yml?style=flat-square)](https://github.com/hnz/yaid/actions/workflows/check-js.yml)
 
 # 🆔 YAID-js
 
