@@ -22,8 +22,8 @@ jobs:
 
       - name: Install dependecies
         working-directory: ./yaid-py
-        run: pip3 install krock32
+        run: pip install krock32
 
       - name: Test python
         working-directory: yaid-py
-        run: python yaid_test.py -v
+        run: python test.py -v

@@ -19,9 +19,52 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          goversion: go.mod
+          #goversion: go.mod
           ldflags: -s -w -X main.version=$GITHUB_REF
-          md5sum: FALSE
-          sha256sum: TRUE
-          compress_assets: OFF
+          md5sum: false
+          sha256sum: true
+          compress_assets: false
           executable_compression: upx
+
+  release-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: oven-sh/setup-bun@v1
+
+      - name: Install dependecies
+        working-directory: ./yaid-js
+        run: bun install
+
+      - name: Build
+        working-directory: ./yaid-js
+        run: bun run build
+
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  release-py:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dependecies
+        working-directory: ./yaid-py
+        run: pip install krock32
+
+      - name: Build python package
+        working-directory: yaid-py
+        run: python -m build
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
+          repository-url: https://test.pypi.org/legacy/
+          packages-dir: yaid-py/dist/

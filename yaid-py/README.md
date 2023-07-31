@@ -49,7 +49,7 @@ Show info
 
 ## Test
 
-    python3 yaid_test.py
+    python3 test.py
 
 ## Building the documentation
 
