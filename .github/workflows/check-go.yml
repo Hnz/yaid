@@ -1,0 +1,26 @@
+name: Check pull request
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - yaid-go/**
+
+jobs:
+  yaid-go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: "yaid-go/go.mod"
+
+      - uses: Jerome1337/gofmt-action@v1.0.5
+        with:
+          gofmt-path: "./src"
+          gofmt-flags: "-l -d"
+
+      - name: Test go
+        working-directory: yaid-go
+        run: go test .

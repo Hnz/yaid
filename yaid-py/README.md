@@ -1,6 +1,7 @@
 [![PyPI](https://img.shields.io/pypi/v/yaid?style=for-the-badge)](https://pypi.org/project/yaid)
 [![black](https://img.shields.io/badge/code--style-black-black?style=for-the-badge)](https://black.readthedocs.io/)
 [![License](https://img.shields.io/github/license/hnz/yaid?style=for-the-badge)](https://github.com/hnz/yaid/blob/main/LICENSE)
+[![Build status](https://github.com/hnz/yaid/actions/workflows/check-py.yml/badge.svg)](https://github.com/hnz/yaid/actions/workflows/check-py.yml)
 
 # 🆔 YAID-py
 
