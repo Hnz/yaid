@@ -16,13 +16,11 @@ jobs:
         with:
           go-version-file: "yaid-go/go.mod"
 
-      - uses: Jerome1337/gofmt-action@v1.0.5
-        with:
-          gofmt-path: "./src"
-          gofmt-flags: "-l -d"
+      - name: Check go code format
+        run: gofmt -l -d ./yaid-g
 
       - name: Lint go
-        run: revive yaid-go
+        run: go run revive yaid-go
 
       - name: Test go
         working-directory: yaid-go
