@@ -17,7 +17,7 @@ jobs:
           go-version-file: "yaid-go/go.mod"
 
       - name: Check go code format
-        run: gofmt -l -d ./yaid-g
+        run: gofmt -l -d ./yaid-go
 
       - name: Lint go
         run: go run revive yaid-go
