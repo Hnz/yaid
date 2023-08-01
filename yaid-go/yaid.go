@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Hans van Leeuwen. MIT Licensed. See LICENSE.md for full license.
 
 /*
-yaid is a go package that implements [YAID]
+Package yaid is a go package that implements [Yet Another ID]
 
 # Example
 
@@ -12,7 +12,7 @@ yaid is a go package that implements [YAID]
 	y := yaid.NewGenerator()
 	id := y()
 
-[YAID]: https://github.com/hnz/yaid
+[Yet Another ID]: https://github.io/yaid
 */
 package yaid
 
@@ -27,19 +27,20 @@ import (
 )
 
 // Get the maximum timestamp by setting all bytes to maximum value
-var max_timestamp = YAID{255, 255, 255, 255, 255, 255, 255, 255}.timestamp()
+var maxTimestamp = YAID{255, 255, 255, 255, 255, 255, 255, 255}.timestamp()
 
 const (
-	TIME_BYTES = 5
-	DIFF_BYTES = 2
-	META_BYTES = 1
+	TimeBytes = 5 // TimeBytes specifies how many bytes are used for the timestamp
+	DiffBytes = 2 // DiffBytes specifies how many bytes are used for the differentiator
+	MetaBytes = 1 // MetaBytes specifies how many bytes are used for metadata
 
-	// 1 for miliseconds, 10 for centiseconds, 1000 for seconds, etc.
-	DEFIDER = 10
+	// Defider of the timestamp. 1 for miliseconds, 10 for centiseconds, 1000 for seconds, etc.
+	Defider = 10
 )
 
-type YAID [TIME_BYTES + DIFF_BYTES + META_BYTES]byte
+type YAID [TimeBytes + DiffBytes + MetaBytes]byte
 
+// Return the
 func (y YAID) Int() uint64 {
 	return binary.BigEndian.Uint64(y[:])
 }
@@ -50,46 +51,46 @@ func (y YAID) String() string {
 }
 
 func (y *YAID) Differentiator() []byte {
-	return y[TIME_BYTES : TIME_BYTES+DIFF_BYTES]
+	return y[TimeBytes : TimeBytes+DiffBytes]
 }
 
 // Set the differentiator
 func (y *YAID) SetDifferentiator(b []byte) error {
 
-	if len(b) != DIFF_BYTES {
-		return fmt.Errorf("random part must be exactly %d bytes", DIFF_BYTES)
+	if len(b) != DiffBytes {
+		return fmt.Errorf("random part must be exactly %d bytes", DiffBytes)
 	}
 
-	for i := 0; i < DIFF_BYTES; i++ {
-		(*y)[i+TIME_BYTES] = b[i]
+	for i := 0; i < DiffBytes; i++ {
+		(*y)[i+TimeBytes] = b[i]
 	}
 
 	return nil
 }
 
 func (y *YAID) Meta() []byte {
-	return y[TIME_BYTES+DIFF_BYTES:]
+	return y[TimeBytes+DiffBytes:]
 }
 
 func (y *YAID) SetMeta(meta []byte) error {
-	if len(meta) > META_BYTES {
-		return fmt.Errorf("meta key must not be longer than %d bytes", META_BYTES)
+	if len(meta) > MetaBytes {
+		return fmt.Errorf("meta key must not be longer than %d bytes", MetaBytes)
 	}
 
-	for i := 0; i < META_BYTES; i++ {
-		(*y)[i+TIME_BYTES+DIFF_BYTES] = meta[i]
+	for i := 0; i < MetaBytes; i++ {
+		(*y)[i+TimeBytes+DiffBytes] = meta[i]
 	}
 
 	return nil
 }
 
 func (y YAID) Time() time.Time {
-	ms := y.timestamp() * DEFIDER
+	ms := y.timestamp() * Defider
 	return time.UnixMilli(int64(ms))
 }
 
 func (y *YAID) SetTime(t time.Time) error {
-	ms := t.UnixMilli() / DEFIDER
+	ms := t.UnixMilli() / Defider
 	return y.setTimestamp(uint64(ms))
 }
 
@@ -113,8 +114,8 @@ func (y YAID) timestamp() uint64 {
 
 // Set the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC
 func (y *YAID) setTimestamp(t uint64) error {
-	if t > max_timestamp {
-		return fmt.Errorf("epoch must not be greater than %d", max_timestamp)
+	if t > maxTimestamp {
+		return fmt.Errorf("epoch must not be greater than %d", maxTimestamp)
 	}
 
 	(*y)[0] = byte(t >> 32)
@@ -142,7 +143,7 @@ func (g Generator) New() (y YAID, err error) {
 		return y, err
 	}
 
-	b := make([]byte, DIFF_BYTES)
+	b := make([]byte, DiffBytes)
 	_, err = g.Random.Read(b)
 	if err != nil {
 		return y, err
@@ -169,8 +170,8 @@ func Parse(yaid string) (y YAID, err error) {
 	if err != nil {
 		return y, err
 	}
-	if len(b) != TIME_BYTES+DIFF_BYTES+META_BYTES {
-		return y, fmt.Errorf("yaid must be exactly %d bytes", TIME_BYTES+DIFF_BYTES+META_BYTES)
+	if len(b) != TimeBytes+DiffBytes+MetaBytes {
+		return y, fmt.Errorf("yaid must be exactly %d bytes", TimeBytes+DiffBytes+MetaBytes)
 	}
 
 	copy(y[:], b)

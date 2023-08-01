@@ -21,6 +21,9 @@ jobs:
           gofmt-path: "./src"
           gofmt-flags: "-l -d"
 
+      - name: Lint go
+        run: revive yaid-go
+
       - name: Test go
         working-directory: yaid-go
         run: go test .
