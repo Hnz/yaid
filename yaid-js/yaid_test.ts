@@ -21,10 +21,19 @@ test("parse", async () => {
 	expect(y.toString()).toEqual("4X7BMTC6T6XEW");
 });
 
+test("toString", async () => {
+	const b = new Uint8Array([39, 78, 186, 105, 134, 209, 186, 238]);
+	const y = new YAID(b);
+
+	expect(y.toString()).toEqual("4X7BMTC6T6XEW");
+});
+
 test("toNumber", async () => {
 	const min = Parse("0000000000000");
+	const max = Parse("4X7BMTC6T6XEW");
 
 	expect(min.toNumber()).toEqual(0);
+	expect(max.toNumber()).toEqual(17202292101924671000);
 });
 
 test("set and get meta", async () => {
@@ -59,16 +68,16 @@ test("set and get timestamp", async () => {
 	expect(y.toBytes()).toEqual(new Uint8Array([255, 255, 255, 255, 255, 0, 0, 0]));
 	expect(y.timestamp()).toEqual(MAX_TIMESTAMP);
 });
-/*
+
 test("set and get time", async () => {
 	const y = new YAID();
 	const d = new Date(2222, 1, 2, 3, 4, 5, 678);
 	y.setTime(d);
-	expect(y.time()).toEqual(new Date(2222, 1, 2, 3, 4, 5, 678));
-	expect(y.timestamp()).toEqual(795243984505);
+	expect(y.time()).toEqual(new Date(2222, 1, 2, 3, 4, 5, 670));
 	expect(y.toBytes()).toEqual(new Uint8Array([185, 40, 60, 54, 121, 0, 0, 0]));
+	expect(y.timestamp()).toEqual(795243984505);
 });
-*/
+
 test("parse with incorrect length", async () => {
 	const buf = Uint8Array.from([1, 2, 3]);
 	expect(() => new YAID(buf)).toThrow("bytes length must be 8");
