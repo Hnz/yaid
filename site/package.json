@@ -8,7 +8,8 @@
 	"type": "module",
 	"scripts": {
 		"build": "bun build --minify --sourcemap=external --outdir=dist script.js && bun run build.ts",
-		"lint": "eslint *.ts *.js && prettier -c ."
+		"lint": "eslint *.ts *.js && prettier -c .",
+		"serve": "serve ./dist"
 	},
 	"dependencies": {
 		"@picocss/pico": "^1.5.10",
@@ -20,6 +21,7 @@
 	},
 	"devDependencies": {
 		"bun-types": "^0.6.14",
-		"prettier": "^3.0.0"
+		"prettier": "^3.0.0",
+		"serve": "^14.2.0"
 	}
 }
