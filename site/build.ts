@@ -5,6 +5,8 @@ import markdownCopy from "markdown-it-copy";
 import highlightjs from "markdown-it-highlightjs";
 import { compileAsync } from "sass";
 
+import { build } from "bun";
+
 const md = markdownIt({ html: true }).use(highlightjs).use(markdownCopy, { btnText: "📋" });
 const gitrev = await run("git rev-parse --short HEAD");
 
@@ -25,6 +27,9 @@ async function main() {
 
 		// Compile CSS
 		compileCSS(),
+
+		// Build js
+		build({ entrypoints: ["script.js"], minify: true, outdir: "dist", sourcemap: "external" }),
 
 		// Create index.html
 		handleMarkdown(

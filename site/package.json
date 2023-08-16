@@ -7,7 +7,7 @@
 	"author": "Hans van Leeuwen",
 	"type": "module",
 	"scripts": {
-		"build": "bun build --minify --sourcemap=external --outdir=dist script.js && bun run build.ts",
+		"build": "bun run build.ts",
 		"lint": "eslint *.ts *.js && prettier -c .",
 		"serve": "serve ./dist"
 	},
@@ -21,6 +21,7 @@
 	},
 	"devDependencies": {
 		"bun-types": "^0.6.14",
+		"eslint": "^8.43.0",
 		"prettier": "^3.0.0",
 		"serve": "^14.2.0"
 	}
