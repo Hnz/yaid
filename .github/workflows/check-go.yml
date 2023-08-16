@@ -20,7 +20,8 @@ jobs:
         run: gofmt -l -d ./yaid-go
 
       - name: Lint go
-        run: go run github.com/mgechev/revive@latest yaid-go
+        working-directory: yaid-go
+        run: staticcheck
 
       - name: Test go
         working-directory: yaid-go
