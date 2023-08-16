@@ -14,6 +14,7 @@ toggleSwitch.addEventListener("change", switchTheme, false);
 let theme = localStorage.getItem("theme");
 if (theme) {
 	setTheme(theme);
+	toggleSwitch.checked = theme === "dark";
 } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
 	setTheme("dark");
 	toggleSwitch.checked = true;
