@@ -20,9 +20,9 @@ Version 0.1
 
 #### Layout
 
-|    Bits | Bytes | Content        |
-| ------: | :---: | -------------- |
-|  0 - 39 |   5   | Timestamp      |
+| Bits    | Bytes | Content        |
+| ------- | :---: | -------------- |
+| 0 - 39  |   5   | Timestamp      |
 | 40 - 55 |   2   | Differentiator |
 | 56 - 63 |   1   | Meta           |
 

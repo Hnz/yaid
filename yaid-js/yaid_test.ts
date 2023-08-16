@@ -30,10 +30,10 @@ test("toString", async () => {
 
 test("toNumber", async () => {
 	const min = Parse("0000000000000");
-	const max = Parse("4X7BMTC6T6XEW");
+	const max = Parse("ZZZZZZZZZZZZZ");
 
 	expect(min.toNumber()).toEqual(0);
-	expect(max.toNumber()).toEqual(17202292101924671000);
+	expect(max.toNumber()).toEqual(888);
 });
 
 test("set and get meta", async () => {

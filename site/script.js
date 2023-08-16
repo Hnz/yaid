@@ -1,7 +1,5 @@
 import { New, Parse } from "../yaid-js/yaid.ts";
 
-let y = New();
-
 function showError(err) {
 	if (err) {
 		yaid.setAttribute("aria-invalid", "true");
@@ -17,8 +15,10 @@ function updateInfo(y) {
 	// Strip the last character to correctly format the date
 	date.value = y.time().toISOString().slice(0, -1);
 	meta.value = y.meta();
-	bytes.value = "[" + y.bytes + "]";
+	bytes.value = "[" + window.y.bytes + "]";
 	showError();
+
+	console.log("updateInfo", date.value);
 }
 
 window.update = function () {
@@ -31,16 +31,18 @@ window.update = function () {
 };
 
 window.updateId = function () {
-	y.setMeta(meta.value);
-	y.setTime(new Date(date.value));
-	yaid.value = y;
-	bytes.value = "[" + y.bytes + "]";
+	window.y.setMeta(meta.value);
+	window.y.setTime(new Date(date.value));
+	yaid.value = window.y;
+	bytes.value = "[" + window.y.bytes + "]";
+
+	console.log("updateId", date.value);
 };
 
 window.generate = function () {
-	y = New();
-	yaid.value = y;
-	updateInfo(y);
+	window.y = New();
+	yaid.value = window.y;
+	updateInfo(window.y);
 };
 
 generate();
