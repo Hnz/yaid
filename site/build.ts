@@ -76,9 +76,9 @@ async function compileCSS() {
 }
 
 async function handleMarkdown(
-	template,
-	mdfile,
-	outfile,
+	template: Buffer,
+	mdfile: string,
+	outfile: string,
 	title = "",
 	description = "",
 	prefix = "",
@@ -95,7 +95,7 @@ async function handleMarkdown(
 	return writeFile(outfile, html);
 }
 
-async function run(cmd): Promise<String> {
+async function run(cmd): Promise<string> {
 	return new Promise((resolve, reject) => {
 		exec(cmd, (error, stdout, stderr) => {
 			if (error) {

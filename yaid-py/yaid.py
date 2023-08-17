@@ -108,7 +108,7 @@ class YAID:
         """
         Return id as a crockford base32-encoded string
         """
-        encoder = krock32.Encoder(checksum=False)
+        encoder = krock32.Encoder()
         encoder.update(self.bytes)
         return encoder.finalize()
 
@@ -134,7 +134,7 @@ def parse(yaid: str) -> YAID:
     """
     Create a YAID object from an encoded string
     """
-    decoder = krock32.Decoder(strict=True, checksum=False)
+    decoder = krock32.Decoder(strict=True)
     decoder.update(yaid)
     b = decoder.finalize()
     return YAID(bytearray(b))

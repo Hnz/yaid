@@ -5,7 +5,7 @@ import yaid
 
 
 def load_tests(loader, tests, ignore):
-    """Run documentation  tests"""
+    """Run documentation tests"""
     tests.addTests(doctest.DocTestSuite(yaid))
     return tests
 
