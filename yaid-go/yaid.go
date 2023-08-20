@@ -27,7 +27,7 @@ import (
 )
 
 // Get the maximum timestamp by setting all bytes to maximum value
-var maxTimestamp = YAID{255, 255, 255, 255, 255, 255, 255, 255}.timestamp()
+var maxTimestamp = YAID{255, 255, 255, 255, 255, 255, 255, 255}.Timestamp()
 
 const (
 	TimeBytes = 5 // TimeBytes specifies how many bytes are used for the timestamp
