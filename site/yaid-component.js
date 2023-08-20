@@ -1,7 +1,6 @@
-import { New, Parse } from "../yaid-js/yaid.ts";
+import { New, Parse } from "../yaid-js/yaid.js";
 
-const template = document.createElement("template");
-template.innerHTML = `
+const html = `
 <div class="grid">
 	<article>
 		<header>YAID</header>
@@ -11,7 +10,7 @@ template.innerHTML = `
 					ID
 					<input id="yaid" type="text" minlength="8" autofocus />
 				</label>
-				<button id="buttonGenerate">Generate</button>
+				<button id="generateButton">Generate</button>
 				<mark id="errorBox"></mark>
 			</div>
 			<div>
@@ -38,30 +37,26 @@ template.innerHTML = `
 </div>
 `;
 
-class YaidComponent extends HTMLElement {
+export class YaidComponent extends HTMLElement {
 	constructor() {
 		super();
 
-		const templateContent = template.content;
-
-		this.attachShadow({ mode: "open" });
-		this.shadowRoot.appendChild(templateContent.cloneNode(true));
+		this.innerHTML = html;
 
 		this.y = New();
-		this.yaidInput = this.shadowRoot.getElementById("yaid");
-		this.dateInput = this.shadowRoot.getElementById("date");
-		this.metaInput = this.shadowRoot.getElementById("meta");
-		this.bytesInput = this.shadowRoot.getElementById("bytes");
-		this.errorBox = this.shadowRoot.getElementById("errorBox");
+		this.yaidInput = document.getElementById("yaid");
+		this.dateInput = document.getElementById("date");
+		this.metaInput = document.getElementById("meta");
+		this.bytesInput = document.getElementById("bytes");
+		this.errorBox = document.getElementById("errorBox");
+		this.generateButton = document.getElementById("generateButton");
 
-		this.updateInfo();
+		this.generate();
 
 		this.yaidInput.addEventListener("input", this.update.bind(this));
 		this.dateInput.addEventListener("change", this.updateId.bind(this));
 		this.metaInput.addEventListener("change", this.updateId.bind(this));
-		this.shadowRoot
-			.getElementById("buttonGenerate")
-			.addEventListener("click", this.generate.bind(this));
+		this.generateButton.addEventListener("click", this.generate.bind(this));
 	}
 
 	showError(err) {

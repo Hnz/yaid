@@ -16,7 +16,9 @@ async function main() {
 	} catch {}
 
 	const template = await readFile("template.html");
-	const app = (await readFile("app.html")).toString();
+	const app =
+		'<script type="module" src="yaid-component.js"></script>' +
+		"<yaid-component></yaid-component>";
 
 	return Promise.all([
 		// Create skeleton in ./dist
@@ -29,7 +31,12 @@ async function main() {
 		compileCSS(),
 
 		// Build js
-		build({ entrypoints: ["script.js"], minify: true, outdir: "dist", sourcemap: "external" }),
+		build({
+			entrypoints: ["yaid-component.js"],
+			minify: true,
+			outdir: "dist",
+			sourcemap: "external",
+		}),
 
 		// Create index.html
 		handleMarkdown(template, "../README.md", "dist/index.html", "YAID", "Yet Another ID", app),
@@ -77,7 +84,7 @@ async function handleMarkdown(
 	prefix = "",
 ) {
 	const markdown = await readFile(mdfile);
-	const main = "\n" + prefix + md.render(markdown.toString());
+	const main = "\n" + prefix + "\n" + md.render(markdown.toString());
 	const html = template
 		.toString()
 		.replace("{{title}}", title)
