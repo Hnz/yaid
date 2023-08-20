@@ -3,8 +3,11 @@
 		<header>YAID</header>
 		<div class="grid">
 			<div>
-				<label>ID<input id="yaid" type="text" minlength="8" oninput="update()" /></label>
-				<button onclick="generate()">Generate</button>
+				<label>
+					ID
+					<input id="yaid" type="text" minlength="8" oninput="update()" autofocus />
+				</label>
+				<button id="buttonGenerate">Generate</button>
 				<mark id="errorBox"></mark>
 			</div>
 			<div>

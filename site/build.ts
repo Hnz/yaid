@@ -16,7 +16,7 @@ async function main() {
 	} catch {}
 
 	const template = await readFile("template.html");
-	const app = await readFile("app.html");
+	const app = '<script type="module" src="script.js" async></script><yaid-form></yaid-form>'; //await readFile("app.html");
 
 	return Promise.all([
 		// Create skeleton in ./dist
@@ -32,14 +32,7 @@ async function main() {
 		build({ entrypoints: ["script.js"], minify: true, outdir: "dist", sourcemap: "external" }),
 
 		// Create index.html
-		handleMarkdown(
-			template,
-			"../README.md",
-			"dist/index.html",
-			"YAID",
-			"Yet Another ID",
-			app.toString(),
-		),
+		handleMarkdown(template, "../README.md", "dist/index.html", "YAID", "Yet Another ID", app),
 
 		// Create yaid-go
 		handleMarkdown(
@@ -67,7 +60,7 @@ async function main() {
 			"yaid-py",
 			"Python SDK for YAID",
 		),
-	]);
+	]).catch(console.error);
 }
 
 async function compileCSS() {
@@ -109,4 +102,4 @@ async function run(cmd): Promise<string> {
 	});
 }
 
-main().catch(console.error);
+main();
