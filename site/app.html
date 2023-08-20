@@ -1,36 +1,42 @@
-<div class="grid">
-	<article>
-		<header>YAID</header>
-		<div class="grid">
-			<div>
-				<label>
-					ID
-					<input id="yaid" type="text" minlength="8" oninput="update()" autofocus />
-				</label>
-				<button id="buttonGenerate">Generate</button>
-				<mark id="errorBox"></mark>
+<template id="yaid-template">
+	<style>
+		/* Add your CSS styles here */
+	</style>
+	<div class="grid">
+		<article>
+			<header>YAID</header>
+			<div class="grid">
+				<div>
+					<label>
+						ID
+						<input id="yaid" type="text" minlength="8" oninput="update()" autofocus />
+					</label>
+					<button id="buttonGenerate">Generate</button>
+					<mark id="errorBox"></mark>
+				</div>
+				<div>
+					<label>
+						UTC Date
+						<input
+							type="datetime-local"
+							id="date"
+							min="1970-01-01T00:00:00.000"
+							max="2318-06-04T06:57:57.750"
+							onchange="updateId()"
+						/>
+					</label>
+					<label>
+						Meta
+						<input type="number" id="meta" min="0" max="255" onchange="updateId()" />
+					</label>
+					<label>
+						Bytes
+						<input type="text" id="bytes" readonly />
+					</label>
+				</div>
 			</div>
-			<div>
-				<label>
-					UTC Date
-					<input
-						type="datetime-local"
-						id="date"
-						min="1970-01-01T00:00:00.000"
-						max="2318-06-04T06:57:57.750"
-						onchange="updateId()"
-					/>
-				</label>
-				<label>
-					Meta
-					<input type="number" id="meta" min="0" max="255" onchange="updateId()" />
-				</label>
-				<label>
-					Bytes
-					<input type="text" id="bytes" readonly />
-				</label>
-			</div>
-		</div>
-	</article>
-</div>
-<script type="module" src="script.js" async></script>
+		</article>
+	</div>
+</template>
+<script type="module" src="script.js"></script>
+<yaid-component></yaid-component>

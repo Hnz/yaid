@@ -16,7 +16,7 @@ async function main() {
 	} catch {}
 
 	const template = await readFile("template.html");
-	const app = '<script type="module" src="script.js" async></script><yaid-form></yaid-form>'; //await readFile("app.html");
+	const app = (await readFile("app.html")).toString();
 
 	return Promise.all([
 		// Create skeleton in ./dist
@@ -88,7 +88,7 @@ async function handleMarkdown(
 	return writeFile(outfile, html);
 }
 
-async function run(cmd): Promise<string> {
+async function run(cmd: string): Promise<string> {
 	return new Promise((resolve, reject) => {
 		exec(cmd, (error, stdout, stderr) => {
 			if (error) {
