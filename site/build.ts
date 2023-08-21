@@ -17,7 +17,7 @@ async function main() {
 
 	const template = await readFile("template.html");
 	const app =
-		'<script type="module" src="yaid-component.js"></script>' +
+		'<script type="module" src="yaid-component.js" async></script>' +
 		"<yaid-component></yaid-component>";
 
 	return Promise.all([

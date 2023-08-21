@@ -62,40 +62,33 @@ export class YaidComponent extends HTMLElement {
 	connectedCallback() {
 		this.innerHTML = html;
 
-		this.yaidInput = document.getElementById("yaid");
-		this.dateInput = document.getElementById("date");
-		this.metaInput = document.getElementById("meta");
 		this.bytesInput = document.getElementById("bytes");
+		this.dateInput = document.getElementById("date");
 		this.errorBox = document.getElementById("errorBox");
 		this.generateButton = document.getElementById("generateButton");
+		this.metaInput = document.getElementById("meta");
+		this.yaidInput = document.getElementById("yaid");
 
 		this.generate();
 
-		this.yaidInput.addEventListener("input", this.update.bind(this));
 		this.dateInput.addEventListener("change", this.updateId.bind(this));
-		this.metaInput.addEventListener("change", this.updateId.bind(this));
 		this.generateButton.addEventListener("click", this.generate.bind(this));
+		this.metaInput.addEventListener("change", this.updateId.bind(this));
+		this.yaidInput.addEventListener("input", () => {
+			this.yaidInput.value = this.yaidInput.value.toUpperCase();
+			this.parse();
+		});
 	}
 
-	showError(err) {
-		if (err) {
-			this.yaidInput.setAttribute("aria-invalid", "true");
-			this.errorBox.style.display = "block";
-			this.errorBox.innerText = err;
-		} else {
-			this.yaidInput.setAttribute("aria-invalid", "false");
-			this.errorBox.style.display = "none";
-		}
+	/** Generate a new id */
+	generate() {
+		this.y = New();
+		this.yaidInput.value = this.y;
+		this.updateInfo();
 	}
 
-	updateInfo() {
-		this.dateInput.value = this.y.time().toISOString().slice(0, -1);
-		this.metaInput.value = this.y.meta();
-		this.bytesInput.value = `[${this.y.bytes}]`;
-		this.showError();
-	}
-
-	update() {
+	/** Update the info from the id */
+	parse() {
 		try {
 			this.y = Parse(this.yaidInput.value);
 			this.updateInfo();
@@ -104,17 +97,36 @@ export class YaidComponent extends HTMLElement {
 		}
 	}
 
+	/**
+	 * Display error message.
+	 * Pass nill to remove error.
+	 * @param {string} err
+	 */
+	showError(err) {
+		if (err) {
+			//this.yaidInput.setAttribute("aria-invalid", "true");
+			this.errorBox.style.display = "block";
+			this.errorBox.innerText = err;
+		} else {
+			//this.yaidInput.setAttribute("aria-invalid", "false");
+			this.errorBox.style.display = "none";
+		}
+	}
+
+	/** Update the info from the id */
+	updateInfo() {
+		this.dateInput.value = this.y.time().toISOString().slice(0, -1);
+		this.metaInput.value = this.y.meta();
+		this.bytesInput.value = `[${this.y.bytes}]`;
+		this.showError();
+	}
+
+	/** Update the id from the info */
 	updateId() {
 		this.y.setMeta(this.metaInput.value);
 		this.y.setTime(new Date(this.dateInput.value));
 		this.yaidInput.value = this.y;
 		this.bytesInput.value = `[${this.y.bytes}]`;
-	}
-
-	generate() {
-		this.y = New();
-		this.yaidInput.value = this.y;
-		this.updateInfo();
 	}
 }
 
