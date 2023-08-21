@@ -1,3 +1,14 @@
+/**
+ * Yaid generator
+ *
+ * @copyright 2023 Hans van Leeuwen
+ * @license MIT
+ * @see https://github.com/Hnz/yaid/tree/main/site/yaid-component.js
+ * @example
+ * <script type="module" src="yaid-component.js"></script>
+ * <yaid-component></yaid-component>
+ */
+
 import { New, Parse } from "../yaid-js/yaid.js";
 
 const html = `
@@ -37,13 +48,20 @@ const html = `
 </div>
 `;
 
+/**
+ * Yaid generator as webcomponents.
+ *
+ * Note that this webcomponent does not use a shadowdom
+ * and is styled using global css.
+ *
+ * @export
+ * @class YaidComponent
+ * @extends {HTMLElement}
+ */
 export class YaidComponent extends HTMLElement {
-	constructor() {
-		super();
-
+	connectedCallback() {
 		this.innerHTML = html;
 
-		this.y = New();
 		this.yaidInput = document.getElementById("yaid");
 		this.dateInput = document.getElementById("date");
 		this.metaInput = document.getElementById("meta");
