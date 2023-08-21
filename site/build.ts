@@ -22,7 +22,6 @@ async function main() {
 
 	return Promise.all([
 		// Create skeleton in ./dist
-		copyFile("darkmode.js", "dist/darkmode.js"),
 		copyFile("assets/logo-js.svg", "dist/logo-js.svg"),
 		copyFile("assets/logo-py.svg", "dist/logo-py.svg"),
 		copyFile("assets/logo-go.svg", "dist/logo-go.svg"),
@@ -31,7 +30,15 @@ async function main() {
 		// Compile CSS
 		compileCSS(),
 
-		// Build js
+		// Build darkmode
+		build({
+			entrypoints: ["darkmode.js"],
+			minify: true,
+			outdir: "dist",
+			sourcemap: "external",
+		}),
+
+		// Build webcomponent
 		build({
 			entrypoints: ["yaid-component.js"],
 			minify: true,
