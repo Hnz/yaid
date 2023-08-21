@@ -26,6 +26,7 @@ async function main() {
 		copyFile("assets/logo-js.svg", "dist/logo-js.svg"),
 		copyFile("assets/logo-py.svg", "dist/logo-py.svg"),
 		copyFile("assets/logo-go.svg", "dist/logo-go.svg"),
+		copyFile("assets/logo-github.svg", "dist/logo-github.svg"),
 
 		// Compile CSS
 		compileCSS(),
