@@ -11,41 +11,45 @@
 
 import { New, Parse } from "../yaid-js/yaid.js";
 
-const html = `
-<div class="grid">
-	<article>
-		<header>YAID</header>
-		<div class="grid">
-			<div>
-				<label>
-					ID
-					<input id="yaid" type="text" minlength="8" autofocus />
-				</label>
-				<button id="generateButton">Generate</button>
-				<mark id="errorBox"></mark>
+const html = /*html*/ `
+	<div class="grid">
+		<article>
+			<header>YAID</header>
+			<div class="grid">
+				<div>
+					<label>
+						ID
+						<input id="yaid" type="text" minlength="8" autofocus />
+					</label>
+					<div class="grid">
+						<button id="generateButton">Generate</button>
+						<button id="copyButton">Copy</button>
+					</div>
+					<mark id="errorBox" style="display:none"></mark>
+					<div id="infoBox" class="secondary" style="display:none"></div>
+				</div>
+				<div>
+					<label>
+						UTC Date
+						<input
+							id="date"
+							type="datetime-local"
+							min="1970-01-01T00:00:00.000"
+							max="2318-06-04T06:57:57.750"
+						/>
+					</label>
+					<label>
+						Meta
+						<input type="number" id="meta" min="0" max="255" />
+					</label>
+					<label>
+						Bytes
+						<input type="text" id="bytes" readonly />
+					</label>
+				</div>
 			</div>
-			<div>
-				<label>
-					UTC Date
-					<input
-						id="date"
-						type="datetime-local"
-						min="1970-01-01T00:00:00.000"
-						max="2318-06-04T06:57:57.750"
-					/>
-				</label>
-				<label>
-					Meta
-					<input type="number" id="meta" min="0" max="255" />
-				</label>
-				<label>
-					Bytes
-					<input type="text" id="bytes" readonly />
-				</label>
-			</div>
-		</div>
-	</article>
-</div>
+		</article>
+	</div>
 `;
 
 /**
@@ -63,9 +67,11 @@ export class YaidComponent extends HTMLElement {
 		this.innerHTML = html;
 
 		this.bytesInput = document.getElementById("bytes");
+		this.copyButton = document.getElementById("copyButton");
 		this.dateInput = document.getElementById("date");
 		this.errorBox = document.getElementById("errorBox");
 		this.generateButton = document.getElementById("generateButton");
+		this.infoBox = document.getElementById("infoBox");
 		this.metaInput = document.getElementById("meta");
 		this.yaidInput = document.getElementById("yaid");
 
@@ -77,6 +83,10 @@ export class YaidComponent extends HTMLElement {
 		this.yaidInput.addEventListener("input", () => {
 			this.yaidInput.value = this.yaidInput.value.toUpperCase();
 			this.parse();
+		});
+		this.copyButton.addEventListener("click", () => {
+			navigator.clipboard.writeText(this.yaidInput.value);
+			this.showInfo("ID copied to clipboard");
 		});
 	}
 
@@ -100,16 +110,28 @@ export class YaidComponent extends HTMLElement {
 	/**
 	 * Display error message.
 	 * Pass nill to remove error.
-	 * @param {string} err
+	 * @param {string} msg
 	 */
-	showError(err) {
-		if (err) {
-			//this.yaidInput.setAttribute("aria-invalid", "true");
+	showError(msg) {
+		if (msg) {
 			this.errorBox.style.display = "block";
-			this.errorBox.innerText = err;
+			this.errorBox.innerText = msg;
 		} else {
-			//this.yaidInput.setAttribute("aria-invalid", "false");
 			this.errorBox.style.display = "none";
+		}
+	}
+
+	/**
+	 * Display error message.
+	 * Pass nill to remove error.
+	 * @param {string} msg
+	 */
+	showInfo(msg) {
+		if (msg) {
+			this.infoBox.style.display = "block";
+			this.infoBox.innerText = msg;
+		} else {
+			this.infoBox.style.display = "none";
 		}
 	}
 
