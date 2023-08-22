@@ -12,14 +12,14 @@
 	"scripts": {
 		"build": "tsc yaid.ts --declaration --emitDeclarationOnly --outDir dist && bun build yaid.ts --outdir dist --sourcemap external",
 		"docs": "typedoc --plugin typedoc-plugin-markdown --out docs yaid.ts",
-		"lint": "eslint *.ts *.js && prettier -c .",
+		"lint": "eslint *.hs *.ts && prettier -c .",
 		"test": "bun test"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.60.0",
 		"@typescript-eslint/parser": "^5.60.0",
-		"bun": "^0.6.14",
-		"bun-types": "^0.6.14",
+		"bun": "^0.7.3",
+		"bun-types": "^0.7.3",
 		"eslint": "^8.43.0",
 		"prettier": "^3.0.0",
 		"typedoc": "^0.24.8",
