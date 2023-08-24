@@ -5,6 +5,8 @@ import markdownCopy from "markdown-it-copy";
 import highlightjs from "markdown-it-highlightjs";
 import { compileAsync } from "sass";
 
+import { build } from "bun";
+
 const md = markdownIt({ html: true }).use(highlightjs).use(markdownCopy, { btnText: "📋" });
 const gitrev = await run("git rev-parse --short HEAD");
 
@@ -14,27 +16,38 @@ async function main() {
 	} catch {}
 
 	const template = await readFile("template.html");
-	const app = await readFile("app.html");
+	const app =
+		'<script type="module" src="yaid-component.js" async></script>' +
+		"<yaid-component></yaid-component>";
 
 	return Promise.all([
 		// Create skeleton in ./dist
-		copyFile("darkmode.js", "dist/darkmode.js"),
 		copyFile("assets/logo-js.svg", "dist/logo-js.svg"),
 		copyFile("assets/logo-py.svg", "dist/logo-py.svg"),
 		copyFile("assets/logo-go.svg", "dist/logo-go.svg"),
+		copyFile("assets/logo-github.svg", "dist/logo-github.svg"),
 
 		// Compile CSS
 		compileCSS(),
 
+		// Build darkmode
+		build({
+			entrypoints: ["darkmode.js"],
+			minify: true,
+			outdir: "dist",
+			sourcemap: "external",
+		}),
+
+		// Build webcomponent
+		build({
+			entrypoints: ["yaid-component.js"],
+			minify: true,
+			outdir: "dist",
+			sourcemap: "external",
+		}),
+
 		// Create index.html
-		handleMarkdown(
-			template,
-			"../README.md",
-			"dist/index.html",
-			"YAID",
-			"Yet Another ID",
-			app.toString(),
-		),
+		handleMarkdown(template, "../README.md", "dist/index.html", "YAID", "Yet Another ID", app),
 
 		// Create yaid-go
 		handleMarkdown(
@@ -62,7 +75,7 @@ async function main() {
 			"yaid-py",
 			"Python SDK for YAID",
 		),
-	]);
+	]).catch(console.error);
 }
 
 async function compileCSS() {
@@ -71,15 +84,15 @@ async function compileCSS() {
 }
 
 async function handleMarkdown(
-	template,
-	mdfile,
-	outfile,
+	template: Buffer,
+	mdfile: string,
+	outfile: string,
 	title = "",
 	description = "",
 	prefix = "",
 ) {
 	const markdown = await readFile(mdfile);
-	const main = "\n" + prefix + md.render(markdown.toString());
+	const main = "\n" + prefix + "\n" + md.render(markdown.toString());
 	const html = template
 		.toString()
 		.replace("{{title}}", title)
@@ -90,7 +103,7 @@ async function handleMarkdown(
 	return writeFile(outfile, html);
 }
 
-async function run(cmd): Promise<String> {
+async function run(cmd: string): Promise<string> {
 	return new Promise((resolve, reject) => {
 		exec(cmd, (error, stdout, stderr) => {
 			if (error) {
@@ -104,4 +117,4 @@ async function run(cmd): Promise<String> {
 	});
 }
 
-main().catch(console.error);
+main();

@@ -5,7 +5,6 @@ package yaid_test
 import (
 	"crypto/rand"
 	"fmt"
-	"log"
 	"testing"
 	"time"
 
@@ -109,11 +108,5 @@ func BenchmarkULID(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		ms := time.Now().UnixMilli()
 		ulid.New(uint64(ms), rand.Reader)
-	}
-}
-
-func assert(a, b interface{}) {
-	if a != b {
-		log.Fatalln(a, "does not equal ", b)
 	}
 }

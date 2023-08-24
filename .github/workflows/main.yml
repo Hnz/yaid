@@ -13,8 +13,8 @@ jobs:
       - uses: oven-sh/setup-bun@v1
 
       - name: Install dependecies
-        working-directory: ./site
         run: bun install
+        working-directory: ./site
 
       - name: Build website
         run: bun run build

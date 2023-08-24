@@ -71,13 +71,6 @@ export class YAID {
 		for (let i = 0, j = 1; i < TIME_BYTES; i++, j *= 0x100) {
 			this.bytes[TIME_BYTES - 1 - i] = (t / j) & 0xff;
 		}
-		/*
-		this.bytes[0] = t >> 32;
-		this.bytes[1] = (t >> 24) & 255;
-		this.bytes[2] = (t >> 16) & 255;
-		this.bytes[3] = (t >> 8) & 255;
-		this.bytes[4] = t & 255;
-		*/
 	}
 
 	toBytes(): Uint8Array {

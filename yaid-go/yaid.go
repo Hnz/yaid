@@ -27,7 +27,7 @@ import (
 )
 
 // Get the maximum timestamp by setting all bytes to maximum value
-var maxTimestamp = YAID{255, 255, 255, 255, 255, 255, 255, 255}.timestamp()
+var maxTimestamp = YAID{255, 255, 255, 255, 255, 255, 255, 255}.Timestamp()
 
 const (
 	TimeBytes = 5 // TimeBytes specifies how many bytes are used for the timestamp
@@ -85,13 +85,13 @@ func (y *YAID) SetMeta(meta []byte) error {
 }
 
 func (y YAID) Time() time.Time {
-	ms := y.timestamp() * Defider
+	ms := y.Timestamp() * Defider
 	return time.UnixMilli(int64(ms))
 }
 
 func (y *YAID) SetTime(t time.Time) error {
 	ms := t.UnixMilli() / Defider
-	return y.setTimestamp(uint64(ms))
+	return y.SetTimestamp(uint64(ms))
 }
 
 func (y YAID) MarshalText() ([]byte, error) {
@@ -104,7 +104,7 @@ func (y *YAID) UnmarshalText(text []byte) (err error) {
 }
 
 // Returns the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC
-func (y YAID) timestamp() uint64 {
+func (y YAID) Timestamp() uint64 {
 	return uint64(y[4]) |
 		uint64(y[3])<<8 |
 		uint64(y[2])<<16 |
@@ -113,7 +113,7 @@ func (y YAID) timestamp() uint64 {
 }
 
 // Set the time as hundredth of a second since January 1, 1970 12:00:00 AM UTC
-func (y *YAID) setTimestamp(t uint64) error {
+func (y *YAID) SetTimestamp(t uint64) error {
 	if t > maxTimestamp {
 		return fmt.Errorf("epoch must not be greater than %d", maxTimestamp)
 	}

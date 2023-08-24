@@ -7,21 +7,22 @@ on:
       - yaid-go/**
 
 jobs:
-  yaid-go:
+  check-go:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
       - uses: actions/setup-go@v4
         with:
-          go-version-file: "yaid-go/go.mod"
+          go-version-file: yaid-go/go.mod
 
       - name: Check go code format
         run: gofmt -l -d ./yaid-go
 
-      - name: Lint go
-        run: go run github.com/mgechev/revive@latest yaid-go
-
       - name: Test go
         working-directory: yaid-go
         run: go test .
+
+      - uses: dominikh/staticcheck-action@v1.3.0
+        with:
+          working-directory: yaid-go

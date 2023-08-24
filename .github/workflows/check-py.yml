@@ -7,7 +7,7 @@ on:
       - yaid-py/**
 
 jobs:
-  yaid-py:
+  check-py:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
