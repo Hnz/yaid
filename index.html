@@ -38,42 +38,15 @@
 							<img alt="Go SDK" src="logo-go.svg" width="30" height="30" />
 						</a>
 					</li>
+					<li>
+						<a href="https://github.com/hnz/yaid" title="Github repo">
+							<img alt="Github repo" src="logo-github.svg" width="30" height="30" />
+						</a>
+					</li>
 				</ul>
 			</nav>
-			
-<div class="grid">
-	<article>
-		<header>YAID</header>
-		<div class="grid">
-			<div>
-				<label>ID<input id="yaid" type="text" minlength="8" oninput="update()" /></label>
-				<button onclick="generate()">Generate</button>
-				<mark id="errorBox"></mark>
-			</div>
-			<div>
-				<label>
-					UTC Date
-					<input
-						type="datetime-local"
-						id="date"
-						min="1970-01-01T00:00:00.000"
-						max="2318-06-04T06:57:57.750"
-						onchange="updateId()"
-					/>
-				</label>
-				<label>
-					Meta
-					<input type="number" id="meta" min="0" max="255" onchange="updateId()" />
-				</label>
-				<label>
-					Bytes
-					<input type="text" id="bytes" readonly />
-				</label>
-			</div>
-		</div>
-	</article>
-</div>
-<script type="module" src="script.js"></script>
+			<main>
+<script type="module" src="yaid-component.js" async></script><yaid-component></yaid-component>
 <h1>🆔 YAID</h1>
 <p><em>Yet Another ID</em></p>
 <h3>Features</h3>
@@ -91,24 +64,24 @@
 <thead>
 <tr>
 <th>Bits</th>
-<th>Bytes</th>
+<th style="text-align:center">Bytes</th>
 <th>Content</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>0 - 39</td>
-<td>5</td>
+<td style="text-align:center">5</td>
 <td>Timestamp</td>
 </tr>
 <tr>
 <td>40 - 55</td>
-<td>2</td>
+<td style="text-align:center">2</td>
 <td>Differentiator</td>
 </tr>
 <tr>
 <td>56 - 63</td>
-<td>1</td>
+<td style="text-align:center">1</td>
 <td>Meta</td>
 </tr>
 </tbody>
@@ -123,16 +96,16 @@ hundredths of a second.</p>
 A random value or a counter could for example be used.</p>
 <h4>Meta</h4>
 <p>8 bit value that contains information about the id itself. A database shard number for example.</p>
-
+</main>
 			<footer>
-				<br /><br />
-				<hr />
-				<small><i>© 2023 Hans van Leeuwen 6c214c7
+				<p>
+					<hr />
+					<small><i>© 2023 Hans van Leeuwen #7f7a9f5
 </i></small>
-				<div style="float: right">
-					🌞 <input type="checkbox" role="switch" id="toggleSwitch" /> 🌚
-				</div>
-				<br /><br />
+					<div style="float: right">
+						🌞 <input type="checkbox" role="switch" id="toggleSwitch" /> 🌚
+					</div>
+				</p>
 			</footer>
 		</div>
 	</body>

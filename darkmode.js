@@ -1,20 +1,3 @@
-function setTheme(theme) {
-	document.documentElement.setAttribute("data-theme", theme);
-}
+var l=function(f){document.documentElement.setAttribute("data-theme",f)},a=function(f){const n=f.target.checked?"dark":"light";l(n),localStorage.setItem("theme",n)};toggleSwitch.addEventListener("change",a,!1);var k=localStorage.getItem("theme");if(k)l(k),toggleSwitch.checked=k==="dark";else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)l("dark"),toggleSwitch.checked=!0;
 
-function switchTheme(e) {
-	const theme = e.target.checked ? "dark" : "light";
-	setTheme(theme);
-	localStorage.setItem("theme", theme);
-}
-
-toggleSwitch.addEventListener("change", switchTheme, false);
-
-// Set stored theme on load
-let theme = localStorage.getItem("theme");
-if (theme) {
-	setTheme(theme);
-} else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-	setTheme("dark");
-	toggleSwitch.checked = true;
-}
+//# debugId=A71066E16BA6682464756e2164756e21

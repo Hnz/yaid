@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "sources": ["../darkmode.js"],
+  "sourcesContent": [
+    "function setTheme(theme) {\n\tdocument.documentElement.setAttribute(\"data-theme\", theme);\n}\n\nfunction switchTheme(e) {\n\tconst theme = e.target.checked ? \"dark\" : \"light\";\n\tsetTheme(theme);\n\tlocalStorage.setItem(\"theme\", theme);\n}\n\ntoggleSwitch.addEventListener(\"change\", switchTheme, false);\n\n// Set stored theme on load\nlet theme = localStorage.getItem(\"theme\");\nif (theme) {\n\tsetTheme(theme);\n\ttoggleSwitch.checked = theme === \"dark\";\n} else if (window.matchMedia && window.matchMedia(\"(prefers-color-scheme: dark)\").matches) {\n\tsetTheme(\"dark\");\n\ttoggleSwitch.checked = true;\n}\n"
+  ],
+  "mappings": "AAAA,IAAS,UAAQ,CAAC,EAAO,CACxB,SAAS,gBAAgB,aAAa,aAAc,CAAK,GAGjD,UAAW,CAAC,EAAG,CACvB,MAAM,EAAQ,EAAE,OAAO,QAAU,OAAS,QAC1C,EAAS,CAAK,EACd,aAAa,QAAQ,QAAS,CAAK,GAGpC,aAAa,iBAAiB,SAAU,EAAa,EAAK,EAG1D,IAAI,EAAQ,aAAa,QAAQ,OAAO,EACxC,GAAI,EACH,EAAS,CAAK,EACd,aAAa,QAAU,IAAU,eACvB,OAAO,YAAc,OAAO,WAAW,8BAA8B,EAAE,QACjF,EAAS,MAAM,EACf,aAAa,QAAU",
+  "debugId": "A71066E16BA6682464756e2164756e21",
+  "names": []
+}
