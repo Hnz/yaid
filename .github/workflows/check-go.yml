@@ -21,7 +21,7 @@ jobs:
 
       - name: Lint go
         working-directory: yaid-go
-        run: staticcheck
+        run: go run honnef.co/go/tools/cmd/staticcheck
 
       - name: Test go
         working-directory: yaid-go
