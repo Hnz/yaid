@@ -12,7 +12,7 @@
 	"scripts": {
 		"build": "tsc yaid.ts --declaration --emitDeclarationOnly --outDir dist && bun build yaid.ts --outdir dist --sourcemap external",
 		"docs": "typedoc --plugin typedoc-plugin-markdown --out docs yaid.ts",
-		"lint": "eslint *.hs *.ts && prettier -c .",
+		"lint": "eslint *.js *.ts && prettier -c .",
 		"test": "bun test"
 	},
 	"devDependencies": {
