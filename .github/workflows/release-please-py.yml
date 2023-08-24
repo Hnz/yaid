@@ -19,3 +19,4 @@ jobs:
           release-type: python
           package-name: yaid-py
           monorepo-tags: true
+          bump-minor-pre-major: true

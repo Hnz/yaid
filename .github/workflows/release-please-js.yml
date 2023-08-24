@@ -19,3 +19,4 @@ jobs:
           release-type: node
           package-name: yaid-js
           monorepo-tags: true
+          bump-minor-pre-major: true
