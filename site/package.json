@@ -13,7 +13,6 @@
 	},
 	"dependencies": {
 		"@picocss/pico": "^1.5.10",
-		"bun": "^0.7.3",
 		"markdown-it": "^13.0.1",
 		"markdown-it-copy": "^1.2.0",
 		"markdown-it-highlightjs": "^4.0.1",
